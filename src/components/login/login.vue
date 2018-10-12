@@ -4,7 +4,7 @@
         <!-- <div class="back"></div>   -->
         <div class="logo"><img src="../../static/images/logo@2x.png" ></div>
 
-
+        <!--不孬不孬-->
         <!-- 登录、注册按钮 -->
         <div class="dlzc_btn">
             <span  @click="showToggle">登录</span>
