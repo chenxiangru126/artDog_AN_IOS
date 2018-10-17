@@ -6,7 +6,7 @@ const get_usr_info=resolve=>{
             token: "096327b8-1cef-4103-bc6d-1dde3d594be300",
             // mobile:"15865126812",
             // token: "",
-            userId:"",
+            userId:"096327b8-1cef-4103-bc6d-1dde3d594be300",
             // mobile:""
         };
     }else{

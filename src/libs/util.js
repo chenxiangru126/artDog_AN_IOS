@@ -50,7 +50,10 @@ util.ajax.interceptors.response.use(function (config) {
     Indicator.close();
     // 请求异常提示
     if(config.data&&config.data.code!=200){
-        Toast(config.data.message)
+        if(config.config.url.indexOf("alert=0")<=0){
+            Toast(config.data.message)
+        }
+        //Toast(config.data.message)
     }
     //请求参数拦截
     if(config.data&&config.data.code==-10){
