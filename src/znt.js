@@ -135,6 +135,9 @@
     var  scanCode = function(cfg){
     exec("ScanCode",cfg)
     }
+    var  cacheUserAccount = function(cfg){
+    exec("CacheUserAccount",cfg)
+    }
     var znt = {
         config: config,
         fn: _fns,
@@ -154,6 +157,7 @@
         selectImage: selectImage,
         phoneVibration:phoneVibration,
         scanCode:scanCode,
+        cacheUserAccount:cacheUserAccount,
     };
  w.znt = znt;
  }(window));
