@@ -2,9 +2,9 @@
     <div class="more_info">
         <!-- 头部分享按钮 -->
         <div class="header_if" >
-        <div class="_save" @click="toSaveInfo">保存</div>
+            <div class="_save" @click="toSaveInfo">保存</div>
 
-    </div>
+        </div>
         <div class="more_info_content">
             <div class="touxiang_box m1">
                 <div class="word word_1"  >头像</div>

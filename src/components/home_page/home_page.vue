@@ -31,7 +31,8 @@
             },
             img_shop(){
                 // var that = this;
-                this.$router.push('/goods-class')
+                // this.$router.push('/goods-class')
+                this.$router.push('/ceshi')
             },
             personal(){
                 this.$router.push('/personal_center')
