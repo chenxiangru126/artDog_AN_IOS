@@ -93,31 +93,67 @@
     var getCacheUserInfo = function(cfg) {
     exec("GetCacheUserInfo", cfg);
     };
-    var getNetWorkStatus = function(cfg){
+    var cacheFile = function(cfg){
+    exec("CacheFile",cfg);
+    };
+    var netWorkStatus = function(cfg){
     exec("NetworkStatus",cfg);
     };
     var call = function(cfg){
     exec("Call",cfg);
     };
+    var uniquelyIdentifies = function(cfg){
+    exec("UniquelyIdentifies",cfg);
+    };
+    var gyro = function(cfg){
+    exec("Gyro",cfg);
+    };
+    var playSound = function(cfg){
+    exec("PlaySound",cfg);
+    };
+    var closeGyro = function(cfg){
+    exec("CloseGyro",cfg);
+    };
     var fingerprintVerification = function(cfg){
     exec("FingerprintVerification",cfg);
     };
+    var getLocation = function(cfg){
+    exec("GetLocation",cfg);
+    };
+    var thirdLogin = function(cfg){
+    exec("ThirdLogin",cfg);
+    };
     var alipay = function(cfg){
-    exec("UniquelyIdentifies",cfg);
+    exec("Alipay",cfg);
     }
     var  selectImage = function(cfg){
     exec("SelectImage",cfg)
+    }
+    var  phoneVibration = function(cfg){
+    exec("PhoneVibration",cfg)
+    }
+    var  scanCode = function(cfg){
+    exec("ScanCode",cfg)
     }
     var znt = {
         config: config,
         fn: _fns,
         cacheUserInfo: cacheUserInfo,
         getCacheUserInfo: getCacheUserInfo,
-        getNetWorkStatus: getNetWorkStatus,
+        cacheFile:cacheFile,
+        netWorkStatus: netWorkStatus,
         call: call,
+        uniquelyIdentifies:uniquelyIdentifies,
+        playSound:playSound,
+        gyro:gyro,
+        closeGyro:closeGyro,
         fingerprintVerification: fingerprintVerification,
+        getLocation: getLocation,
+        thirdLogin: thirdLogin,
         alipay: alipay,
         selectImage: selectImage,
+        phoneVibration:phoneVibration,
+        scanCode:scanCode,
     };
  w.znt = znt;
  }(window));
