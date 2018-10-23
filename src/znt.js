@@ -138,6 +138,18 @@
     var  cacheUserAccount = function(cfg){
     exec("CacheUserAccount",cfg)
     }
+    var  logout = function(cfg){
+    exec("Logout",cfg)
+    }
+    var  deleteUserAccount = function(cfg){
+    exec("DeleteUserAccount",cfg)
+    }
+    var  share = function(cfg){
+    exec("Share",cfg)
+    }
+    var  contactList = function(cfg){
+    exec("ContactList",cfg)
+    }
     var znt = {
         config: config,
         fn: _fns,
@@ -158,6 +170,10 @@
         phoneVibration:phoneVibration,
         scanCode:scanCode,
         cacheUserAccount:cacheUserAccount,
+        logout:logout,
+        deleteUserAccount:deleteUserAccount,
+        share:share,
+        contactList:contactList,
     };
  w.znt = znt;
  }(window));

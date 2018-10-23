@@ -1,6 +1,7 @@
 <template>
   <div class="switch">
-      <img style="width:50px;height:50px;display: block;" :src="'http://test.bjyishubiyeji.com:8080'+avatar" alt="">
+      <!-- 图片展示 -->
+      <img style="width:50px;height:50px;display: block;" :src="'http://59.110.169.175:8080/uploadImgs/'+avatar" alt="">
       <!-- 缓存数据按钮 -->
       <button @click='test1'>缓存数据</button>
       
@@ -12,6 +13,12 @@
 
       <!-- 添加用户名密码到缓存按钮 -->
       <button @click='addUser'>添加用户名密码</button>
+
+      <!-- 退出登录按钮 -->
+      <button @click='logout'>退出登录</button>
+
+      <!-- 删除用户按钮 -->
+      <button @click='deleteUser'>删除用户</button>
 
       <!-- 打电话按钮 -->
       <button @click='test4'>打电话</button>
@@ -51,6 +58,12 @@
         
       <!-- 扫码按钮 -->
       <button @click='test16'>扫码</button>
+        
+      <!-- 分享按钮 -->
+      <!-- <button @click='test17'>分享</button> -->
+        
+      <!-- 获取通讯录按钮 -->
+      <button @click='test18'>获取通讯录</button>
   </div>
   
 </template>
@@ -78,9 +91,10 @@
                 // userId:"111",
                 nickName:'小花',
                 phone:'15574637892',
+                qin:'fhdbfhb',
                 success:function(res){
 
-                    alert(res.nickName+res.phone);
+                    alert(res.msg);
                 },
                 fail:function(res){
                     alert(res.msg)
@@ -95,7 +109,7 @@
             znt.getCacheUserInfo({
                 // userId:"111",
                 success:function(res){
-                alert("nickName"+res.nickName+"phone"+res.phone);
+                alert("登录状态"+res.isLogin+"用户列表:::"+res.userList+"用户信息"+res.userInfo.nickName+res.userInfo.phone+res.userInfo.qin);
                 },
                 fail:function(res){
                 alert(res.msg)
@@ -107,7 +121,7 @@
         // 缓存文件
         test3(){
             znt.cacheFile({
-                userId:"111",
+                // userId:"111",
                 fileUrl:'http://test.bjyishubiyeji.com:8080/admin/authCopyright/upload.do',
                 targetFilePath:'',
                 success:function(res){
@@ -120,14 +134,42 @@
                 }
                 });
         },
-        // 缓存文件
+        // 缓存用户名密码
         addUser(){
             znt.cacheUserAccount({
                 account	:"ZRJ",
                 password:'12345678',
-                targetFilePath:'',
+                success:function(res){
+                    console.log("成功"+res.msg);
+                alert("成功"+res.msg);
+                },
+                fail:function(res){
+                alert("失败"+res.msg)
+                },
+                cancel:function(){
+                }
+                });
+        },
+        // 退出登录
+        logout(){
+            znt.logout({
                 success:function(res){
                 alert("成功"+res.msg);
+                },
+                fail:function(res){
+                alert("失败"+res.msg)
+                },
+                cancel:function(){
+                }
+                });
+        },
+        // 删除用户
+        deleteUser(){
+            account	:"ZRJ",
+            znt.deleteUserAccount({
+                success:function(res){
+                alert("成功"+res.msg);
+                alert("列表"+res.userList);
                 },
                 fail:function(res){
                 alert("失败"+res.msg)
@@ -166,9 +208,9 @@
         // 播放声音
         test6(){
             znt.playSound({
-                nonstop:'1',
+                nonstop:1,
                 soundType:'internet',
-                pathUrl:'http://www.abstractpath.com/files/audiosamples/sample.mp3',
+                pathUrl:'http://win.web.ra01.sycdn.kuwo.cn/16afa8a41e519c6197fbe2b20720e24a/5bce9a35/resource/n1/192/16/3/958031190.mp3',
                 success:function(res){
                 alert(res.msg);
                 },
@@ -284,8 +326,9 @@
             znt.selectImage({
                 uploadUrl:"http://test.bjyishubiyeji.com:8080/admin/authCopyright/upload.do",
                 success:function(res){
-                    this.avatar= res.imgUrl; //
                     alert(res.imgUrl)
+                    this.avatar= res.imgUrl; //
+                    
                     alert(this.avatar);
                 },
                 fail:function(res){
@@ -309,6 +352,33 @@
             znt.scanCode({
                 success:function(res){
                     alert(res.resCode)
+                },
+                fail:function(res){
+                    alert(res.msg)
+                }
+            });
+        },
+        // // 分享
+        // test17(){
+        //     znt.share({
+        //         title:'艺狗APP',
+        //         desc:'一个专为设计家打造的艺术品电商平台，涵盖艺术类、版权产品、平台服务的电子商务平台',
+        //         imgUrl:'',
+        //         link:'',
+        //         success:function(res){
+        //             alert(res.resCode)
+        //         },
+        //         fail:function(res){
+        //             alert(res.msg)
+        //         }
+        //     });
+        // },
+        // 通讯录
+        test18(){
+            znt.contactList({
+                success:function(res){
+                    alert('联系人：：：'+res.list[0])
+                    alert('xingming+++'+res.list[0].name,'手机+++'+res.list[0].phone)
                 },
                 fail:function(res){
                     alert(res.msg)
