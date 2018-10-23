@@ -126,7 +126,7 @@
                 this.loading = true;
                 this.null_data = false;
                 this.page = 1;
-                 this.items=[];
+                this.items=[];
                 this.initData();
             },
             nav_open() {
