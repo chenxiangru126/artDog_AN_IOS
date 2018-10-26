@@ -18,13 +18,13 @@
                         <div class="denglu_top">
                             <span class="call_pic"><img src="../../static/images/phone@2x.png" ></span>
                             <span class="phone l1">
-                                <input type="text" placeholder="请输入手机号" maxlength="11" >
+                                <input type="text" placeholder="请输入手机号" maxlength="11"  v-model="dl_phone">
                             </span>
                         </div>
                         <div class="denglu_bottom">
                             <span class="mima_pic"><img src="../../static/images/password@2x.png"></span>
                             <span class="mima l1">
-                                <input type="text" placeholder="请输入密码" maxlength="16">
+                                <input type="text" placeholder="请输入密码" maxlength="16" v-model="dl_mima">
                                 <img src="../../static/images/xianshiyanjing@2x.png" >
                             </span>
                         </div>
@@ -46,7 +46,7 @@
                         <div class="denglu_top">
                             <span class="call_pic"><img src="../../static/images/phone@2x.png" ></span>
                             <span class="phone l1">
-                                <input type="text" placeholder="请输入手机号" maxlength="11" v-model="phone">
+                                <input type="text" placeholder="请输入手机号" maxlength="11" v-model="tel_phone">
                                 <span v-show="!get_code_show" @click="get_code">获取验证码</span>
                                 <span  v-show="get_code_show">{{timers}}s</span>
                             </span>
@@ -57,7 +57,7 @@
                         <div class="denglu_bottom">
                             <span class="mima_pic"><img src="../../static/images/password@2x.png"></span>
                             <span class="mima l1">
-                                <input type="text" placeholder="请输入8-16位字母或数字" maxlength="16">
+                                <input type="text" placeholder="请输入8位字母或数字" maxlength="16" v-model="mi_code">
                                 <img src="../../static/images/xianshiyanjing@2x.png" >
                             </span>
                         </div>
@@ -65,7 +65,7 @@
                         
                     </div>
                     <div class="denglu_btn">
-                        <span>注册</span>
+                        <span @click="zhuce_btn">注册</span>
                     </div>
                 </div>
             </div>
@@ -92,7 +92,11 @@ export default {
             password:null,//密码
             updateType:'1',
             timers:59,
-            get_code_show:false
+            get_code_show:false,
+            tel_phone:null,//注册的手机号
+            mi_code:null,//注册的密码
+            dl_phone:null,//登录手机号
+            dl_mima:null,//登录密码
         }
     },
     methods: {
@@ -109,22 +113,24 @@ export default {
         //登录注册按钮
         denglu_btn(){
 
-            let phone = this.phone
+            let phone = this.dl_phone
+            let password = this.dl_mima
             let updateType = '1'
             let _p = {
                 phone,
+                password,
                 updateType
             }
-            this.util.ajax.post('/admin/sysUserReal/sendCode.do', _p).then(e=>{
-                if(e.yan_code == 200){
+            this.util.ajax.post('/admin/users/toDenglu.do', _p).then(e=>{
+                // if(e.code == 200){
                     
-                }
+                // }
             })
         },
         get_code(){
             //  要先判断是不是有电话号码还有格式是否正确
-            let  myreg=/^[1][3,4,5,7,8][0-9]{9}$/
-            let phone = this.phone
+            let myreg=/^[1][3,4,5,7,8][0-9]{9}$/
+            let phone = this.tel_phone
             if(phone != null && myreg.test(phone)){
                 this.get_code_show = true;
                 let timer = this.timers
@@ -145,20 +151,59 @@ export default {
                     
                 },1000)
                 //这里发送请求
+                    let phone = this.tel_phone;
+                    let updateType = 1
                     let _p = {
-                        phone,
-                        updateType:1
+                        updateType,
+                        phone                       
                     }
-                    this.util.ajax.get('admin/sysUserReal/sendCode.do?updataType=1&phone='+phone).then(e=>{
-                        if(yan_code == 200){
-                            this.Toast('验证码发送成功')
-                            this.yan_code= e.data;
-                        }
-                    })
+                    
+                    // this.util.ajax.get('/admin/users/sendCode02.do?phone='+this.tel_phone+'&updateType='+updateType).then(e=>{                       
+                    //     this.Toast('验证码发送成功')
+                    //     this.get_yan_code= e.data;
+                    //     console.log(e.data)                       
+                    // })
+                this.util.ajax.get('admin/sysUserReal/sendCode.do?updataType=1&phone='+phone).then(e=>{  
+                if(e.code ==200){
+                    this.Toast('验证码发送成功')
+                    this.get_yan_code = e.data;  
+                    console.log(e.data)
+                    }
+                })
             }else{
                 this.Toast('请输入手机号')
             }
         },
+        zhuce_btn(){
+            let phone = this.tel_phone;
+            let code = this.yan_code;
+            let password = this.mi_code;
+            let get_yan_code = this.get_yan_code;
+            // let updateType = '1'
+            if(code != get_yan_code || get_yan_code ==null){  
+                this.Toast('请输入正确的验证码') ; 
+                return false;    
+            }else if(password ==null){
+              this.Toast('请输入密码')
+              return false;    
+            }else{
+                let updateType = '1'
+                let _p = {
+                   phone,
+                   code,
+                   password,
+                   updateType
+                }
+              this.util.ajax.get('/admin/users/regOrUpdate.do?phone='+phone+'&code='+code+'&password='+password+'&updateType='+updateType).then(e=>{
+                    if(e.code == 200){
+                        alert(e.msg)
+                        this.$router.push('/home_page')    
+                    }
+
+              })
+
+            }
+        }
 
     }
 }
