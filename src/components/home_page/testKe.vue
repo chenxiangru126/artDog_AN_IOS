@@ -80,7 +80,22 @@
 
     //判断是否有店铺
     mounted(){
-    
+        // znt.statusBarStyle({
+
+        //         // userId:"111",
+        //         style:'Light',
+                
+        //         success:function(res){
+
+        //             alert(res.msg);
+        //         },
+        //         fail:function(res){
+        //             alert(res.msg)
+        //         },
+        //         cancel:function(){
+        //         }
+        //         });
+
     },
 
     methods:{
@@ -89,9 +104,9 @@
             znt.cacheUserInfo({
 
                 // userId:"111",
-                nickName:'小花',
-                phone:'15574637892',
-                qin:'fhdbfhb',
+                token:'fd1e37eb-b9a8-4744-908a-d32abd472eea',
+                userId: 'fd1e37eb-b9a8-4744-908a-d32abd472eea',
+                mobile: '15210602450',
                 success:function(res){
 
                     alert(res.msg);
@@ -109,7 +124,7 @@
             znt.getCacheUserInfo({
                 // userId:"111",
                 success:function(res){
-                alert("登录状态"+res.isLogin+"用户列表:::"+res.userList+"用户信息"+res.userInfo.nickName+res.userInfo.phone+res.userInfo.qin);
+                alert("登录状态"+res.isLogin+"用户列表:::"+res.userList[0].account+res.userList[0].password+"用户信息"+res.userInfo.token+res.userInfo.userId+res.userInfo.mobile);
                 },
                 fail:function(res){
                 alert(res.msg)
@@ -125,7 +140,7 @@
                 fileUrl:'http://test.bjyishubiyeji.com:8080/admin/authCopyright/upload.do',
                 targetFilePath:'',
                 success:function(res){
-                alert("成功"+res.msg);
+                console.log("成功"+res.msg);
                 },
                 fail:function(res){
                 alert("失败"+res.msg)
@@ -165,8 +180,9 @@
         },
         // 删除用户
         deleteUser(){
-            account	:"ZRJ",
+            
             znt.deleteUserAccount({
+                account	:"ZRJ",
                 success:function(res){
                 alert("成功"+res.msg);
                 alert("列表"+res.userList);
@@ -210,9 +226,9 @@
             znt.playSound({
                 nonstop:1,
                 soundType:'internet',
-                pathUrl:'http://win.web.ra01.sycdn.kuwo.cn/16afa8a41e519c6197fbe2b20720e24a/5bce9a35/resource/n1/192/16/3/958031190.mp3',
+                pathUrl:"http://www.ytmp3.cn/down/54084.mp3",
                 success:function(res){
-                alert(res.msg);
+                console.log(res.msg);
                 },
                 fail:function(res){
                 alert(res.msg)
@@ -227,7 +243,7 @@
                 nonstop:1,
                 
                 success:function(res){
-                alert("x"+res.x+"y"+res.y+"z"+res.z);
+                console.log("x"+res.x+"y"+res.y+"z"+res.z);
                 },
                 fail:function(res){
                 alert(res.msg)
@@ -267,10 +283,10 @@
         // 获取位置
         test10(){
             znt.getLocation({
-                
+                nonstop:'1',
                 success:function(res){
                 
-                 alert('city'+res.city+'latitude'+res.latitude+'longitude'+res.longitude)
+                console.log('city'+res.city+'latitude'+res.latitude+'longitude'+res.longitude)
                 },
                 fail:function(res){
                  alert(res.msg)
@@ -324,9 +340,9 @@
         // 相机相册
         test14(){
             znt.selectImage({
-                uploadUrl:"http://test.bjyishubiyeji.com:8080/admin/authCopyright/upload.do",
+                uploadUrl:"http://59.110.169.175:8080/admin/authCopyright/upload.do",
                 success:function(res){
-                    alert(res.imgUrl)
+                    console.log(res.imgUrl)
                     this.avatar= res.imgUrl; //
                     
                     alert(this.avatar);
@@ -351,7 +367,7 @@
         test16(){
             znt.scanCode({
                 success:function(res){
-                    alert(res.resCode)
+                    console.log(res.resCode)
                 },
                 fail:function(res){
                     alert(res.msg)

@@ -3,7 +3,7 @@
         <div class="img_content">
             <div class="img_big" >
                 <div class="btn_content">
-                    <div class="img_copy" ><a href="http://59.110.169.175:9011/#/explain"><img src="../../static/images/banquandengji@2x.png" ></a></div>
+                    <div class="img_copy" ><a href="http://59.110.169.175:9011/copyright/index.html#/explain"><img src="../../static/images/banquandengji@2x.png" ></a></div>
                     <div class="img_shop" @click="img_shop" ><img src="../../static/images/jiaoyidianshang@2x.png" ></div>
                 </div>    
             </div>
@@ -23,8 +23,26 @@
 </style>
 
 <script>
+    import '../../znt.js' ;
     export default {
+        created(){
+           znt.statusBarStyle({
 
+                // userId:"111",
+                style:'Light',
+                
+                success:function(res){
+
+                    alert(res.msg);
+                },
+                fail:function(res){
+                    alert(res.msg)
+                },
+                cancel:function(){
+                }
+                });
+ 
+        },
         methods:{
             img_copy(){
                 

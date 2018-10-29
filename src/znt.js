@@ -55,7 +55,7 @@
                     if (data.code) {
                         if (co.success && typeof co.success == "function") {
                             co.success(data.data);
-                            alert(data.data);
+                            // alert(data.data);
                         };
                     } else {
                         if (isNull(data.error)) {
@@ -150,6 +150,9 @@
     var  contactList = function(cfg){
     exec("ContactList",cfg)
     }
+    var  statusBarStyle = function(cfg){
+    exec("StatusBarStyle",cfg)
+    }
     var znt = {
         config: config,
         fn: _fns,
@@ -174,6 +177,7 @@
         deleteUserAccount:deleteUserAccount,
         share:share,
         contactList:contactList,
+        statusBarStyle:statusBarStyle,
     };
  w.znt = znt;
  }(window));

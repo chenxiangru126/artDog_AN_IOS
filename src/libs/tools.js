@@ -13,7 +13,7 @@ export const isAndroidOrIos = () => {
     } else if (!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)) {
         return 1;
     } else {
-        return -1;
+        return -1; 
     }
 }
 // util.format('yyyy-MM-dd hh:mm:ss')
