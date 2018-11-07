@@ -153,6 +153,12 @@
     var  statusBarStyle = function(cfg){
     exec("StatusBarStyle",cfg)
     }
+    var  openMap = function(cfg){
+    exec("OpenMap",cfg)
+    }
+    var  closeApp = function(cfg){
+    exec("CloseApp",cfg)
+    }
     var znt = {
         config: config,
         fn: _fns,
@@ -178,6 +184,8 @@
         share:share,
         contactList:contactList,
         statusBarStyle:statusBarStyle,
+        openMap:openMap,
+        closeApp:closeApp
     };
  w.znt = znt;
  }(window));

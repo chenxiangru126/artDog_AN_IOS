@@ -64,6 +64,12 @@
         
       <!-- 获取通讯录按钮 -->
       <button @click='test18'>获取通讯录</button>
+
+      <!-- 打开地图按钮 -->
+      <button @click='test19'>打开地图</button>
+
+      <!-- 关闭APP按钮 -->
+      <button @click='test20'>关闭APP</button>
   </div>
   
 </template>
@@ -399,6 +405,24 @@
                 fail:function(res){
                     alert(res.msg)
                 }
+            });
+        },
+        //打开地图
+        test19(){
+            znt.openMap({
+                // success:function(res){
+                //     alert('联系人：：：'+res.list[0])
+                //     alert('xingming+++'+res.list[0].name,'手机+++'+res.list[0].phone)
+                // },
+                // fail:function(res){
+                //     alert(res.msg)
+                // }
+            });
+        },
+        //打开地图
+        test20(){
+            znt.closeApp({
+               
             });
         },
 
