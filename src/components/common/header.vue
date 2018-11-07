@@ -51,7 +51,7 @@ import order_list_sellerVue from '../order/order_list_seller.vue';
                 isShow:true,
                 realName:null,
                 idCard_zheng:null,
-                company_name:null
+                company_name:null 
             }
         },
         props:['item'],
