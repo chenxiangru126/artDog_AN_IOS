@@ -15,16 +15,16 @@
                         </span>
                     </div>
                 </div>
-            </div>                
-            <div class="menu_content wrapper">
-                <div class="content">
+            </div>           
+            <div class="menu_content ">
+                <div class="content_caidan">
                     <div class="menu content">
                         <img class="lcon" src="../../static/images/banquan@2x.png" >
                         <span class="word">版权</span>
                     </div>
                     <p class="xian"></p>
                     <div class="menu wangdian" @click="wangdian">
-                        <img class="lcon" src="../../static/images/gerenw@2x.png" >
+                        <img class="lcon"   src="../../static/images/gerenw@2x.png" >
                         <span class="word">网店</span>
                     </div>
                     <p class="xian"></p>
@@ -42,7 +42,7 @@
                     <span class="word">邀请</span>
                     </div>
                     <p class="xian"></p>
-                    <div class="menu">
+                    <div class="menu" @click="set_up">
                         <img class="lcon" src="../../static/images/shezhi@2x.png" >
                         <span class="word">设置</span>
                     </div>
@@ -61,13 +61,12 @@
 import BScroll from 'better-scroll'
 
     export default {
-        mounted () {
-            let wrapper = document.querySelector('.wrapper')
-            let scroll = new BScroll(wrapper)  
+        mounted () { 
         },
         methods:{
             
             wangdian(){
+                console.log('111111111111111111111')
                 this.$router.push('/switch')
             },
             dingdan(){
@@ -81,6 +80,9 @@ import BScroll from 'better-scroll'
             },
             yaoqing(){
                 this.$router.push('/invite')
+            },
+            set_up(){
+                this.$router.push('/set_up')
             }
         }
     }

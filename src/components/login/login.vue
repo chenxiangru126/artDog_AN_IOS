@@ -24,8 +24,9 @@
                         <div class="denglu_bottom">
                             <span class="mima_pic"><img src="../../static/images/password@2x.png"></span>
                             <span class="mima l1">
-                                <input type="text" placeholder="请输入密码" maxlength="16" v-model="dl_mima">
-                                <img src="../../static/images/xianshiyanjing@2x.png" >
+                                <input type="text" id="input_pwd" placeholder="请输入密码" maxlength="16"  v-model="dl_mima" autofocus/>
+                                <img v-show="is_show"  @click="handle_click_show"  src="../../static/images/xianshiyanjing@2x.png" >
+                                <img v-show="!is_show" @click="handle_click_hide"  src="../../static/images/yincangyanjing@2x.png" >
                             </span>
                         </div>
                         <div class="forget">忘记密码？</div>
@@ -97,9 +98,22 @@ export default {
             mi_code:null,//注册的密码
             dl_phone:null,//登录手机号
             dl_mima:null,//登录密码
+            is_show:true//密码显示隐藏
         }
     },
     methods: {
+        
+        //显示密码
+        handle_click_show(){
+            this.is_show = !this.is_show;
+          $("#input_pwd").attr('type','password')
+        },
+        //密码隐藏
+        handle_click_hide(){
+            this.is_show = !this.is_show;
+           $("#input_pwd").attr('type','text')
+        },
+
         //登录页
         showToggle() {
             this.isLoginShow=true
@@ -112,19 +126,22 @@ export default {
         },
         //登录注册按钮
         denglu_btn(){
-
             let phone = this.dl_phone
             let password = this.dl_mima
-            let updateType = '1'
+            // let updateType = '1'
+            
             let _p = {
                 phone,
                 password,
-                updateType
+                // updateType
             }
-            this.util.ajax.post('/admin/users/toDenglu.do', _p).then(e=>{
-                // if(e.code == 200){
-                    
-                // }
+            console.log(this.dl_phone)
+            console.log(this.dl_mima)
+            this.util.ajax.get('/admin/users/toDenglu.do?phone='+this.dl_phone+'&password='+this.dl_mima).then(e=>{
+                if(e.success == true){
+                    alert(e.msg)
+                    this.$router.push('/home_page')    
+                }
             })
         },
         get_code(){
@@ -167,7 +184,6 @@ export default {
                 if(e.code ==200){
                     this.Toast('验证码发送成功')
                     this.get_yan_code = e.data;  
-                    console.log(e.data)
                     }
                 })
             }else{
@@ -195,9 +211,12 @@ export default {
                    updateType
                 }
               this.util.ajax.get('/admin/users/regOrUpdate.do?phone='+phone+'&code='+code+'&password='+password+'&updateType='+updateType).then(e=>{
-                    if(e.code == 200){
+                    
+                    if(e.success == true){
                         alert(e.msg)
                         this.$router.push('/home_page')    
+                    }else{
+                        alert('注册失败')
                     }
 
               })
