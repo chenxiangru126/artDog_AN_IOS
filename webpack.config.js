@@ -160,6 +160,7 @@ const config = {
         target: 'http://test.bjyishubiyeji.com:8080',
         // target: 'https://yddwechat.bjyishubiyeji.com:8443',
         //   target: 'http://songzhan.tunnel.qydev.com',
+        // target:'http://192.168.3.40:8080',
         changeOrigin: true,
         secure: false
         } ,
