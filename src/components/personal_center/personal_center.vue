@@ -4,10 +4,12 @@
             <div class="xinxi">
                 <div class="xinxi_content">
                     <div class="touxiang ">
-                        <img src="../../static/images/gerenzhongxintouxiang@2x.png">
+                        <img v-if='!avatar' src="../../static/images/gerenzhongxintouxiang@2x.png">
+                        <img v-else :src="'http://test.bjyishubiyeji.com:8080'+avatar" style="width: 4.7rem;height: 4.7rem;border-radius:50%" >
                     </div>
-                    <div class="nickname ">执念的艺术家</div>
-                    <div class="signature ">待我强大之时，便是你噩梦的开始</div>
+                    <div class="nickname ">{{nickName}}</div>
+                    <div v-if='!signature' class="signature ">待我强大之时，便是你噩梦的开始</div>
+                    <div v-else class="signature ">{{signature}}</div>
                     <div class="info_content jiange" @click="gengduoziliao">
                         <span class="info">查看更多资料</span>
                         <span class="drop-down">
@@ -19,6 +21,7 @@
             <div class="menu_content ">
                 <div class="content_caidan">
                     <div class="menu content">
+                        <a href="http://59.110.169.175:9011/copyright/index.html#/reg_list">
                         <img class="lcon" src="../../static/images/banquan@2x.png" >
                         <span class="word">版权</span>
                     </div>
@@ -61,8 +64,26 @@
 import BScroll from 'better-scroll'
 
     export default {
-        mounted () { 
+        data(){
+            return{
+                avatar:null,
+                nickName:'',
+                signature:''
+
+            }
         },
+        mounted(){
+        // 初始化信息加载
+            this.util.ajax.get('/admin/sysUser/getUserById.do?alert=0').then(e=> {
+                this.nickName = e.bean.nickName
+                this.avatar = e.bean.photo	
+                this.signature = e.bean.signature
+                
+            }) 
+            
+        },
+        // mounted () { 
+        // },
         methods:{
             
             wangdian(){

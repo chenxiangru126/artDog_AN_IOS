@@ -26,7 +26,7 @@
                             <span class="mima l1">
                                 <input type="text" id="input_pwd" placeholder="请输入密码" maxlength="16"  v-model="dl_mima" autofocus/>
                                 <img v-show="is_show"  @click="handle_click_show"  src="../../static/images/xianshiyanjing@2x.png" >
-                                <img v-show="!is_show" @click="handle_click_hide"  src="../../static/images/yincangyanjing@2x.png" >
+                                <img v-show="!is_show" @click="handle_click_hide"  src="../../static/images/mimayincang@2x.png" >
                             </span>
                         </div>
                         <div class="forget">忘记密码？</div>
@@ -81,7 +81,7 @@
 
 <script>
 import util from '../../libs/util'
-
+import '../../znt.js' ;
 
 export default {
     data(){
@@ -96,7 +96,7 @@ export default {
             get_code_show:false,
             tel_phone:null,//注册的手机号
             mi_code:null,//注册的密码
-            dl_phone:null,//登录手机号
+            dl_phone:'',//登录手机号
             dl_mima:null,//登录密码
             is_show:true//密码显示隐藏
         }
@@ -126,6 +126,7 @@ export default {
         },
         //登录注册按钮
         denglu_btn(){
+            let _this = this
             let phone = this.dl_phone
             let password = this.dl_mima
             // let updateType = '1'
@@ -138,11 +139,48 @@ export default {
             console.log(this.dl_phone)
             console.log(this.dl_mima)
             this.util.ajax.get('/admin/users/toDenglu.do?phone='+this.dl_phone+'&password='+this.dl_mima).then(e=>{
+                let _this = this
                 if(e.success == true){
                     alert(e.msg)
-                    this.$router.push('/home_page')    
-                }
-            })
+                    console.log(e.token)
+                    // console.log('昵称：：：'+e.user.nickName)
+                    console.log('手机号：：：'+phone)
+                    // znt.cacheUserAccount({
+                    //     account	:e.user.nickName,
+                    //     password:password,
+                    //     success:function(res){
+                    //     //   console.log("成功"+res.msg);
+                    //       alert("保存用户名密码成功"+res.msg);
+                          znt.cacheUserInfo({ // userId:"111",
+                            token:e.token,
+                            userId: e.token,
+                            mobile: phone,
+                            success:function(res){
+
+                                alert(res.msg);
+                                _this.$router.push('/home_page')
+                                    
+                            },
+                            fail:function(res){
+                                alert(res.msg)
+                            },
+                            cancel:function(){
+                            }
+                        });
+                        
+                        // },
+                        // fail:function(res){
+                        // alert("失败"+res.msg)
+                        // },
+                        // cancel:function(){
+                        }
+                });
+                
+
+                      
+                    
+                // }
+            // })
         },
         get_code(){
             //  要先判断是不是有电话号码还有格式是否正确
