@@ -66,15 +66,17 @@
     export default {
         data(){
             return{
-                avatar:null,
-                nickName:'',
-                signature:''
-
+                avatar:null,//头像
+                nickName:'',//昵称
+                signature:'',//个性签名
+                userId:''//用户id
             }
         },
         mounted(){
-        // 初始化信息加载
-            this.util.ajax.get('/admin/sysUser/getUserById.do?alert=0').then(e=> {
+            // 获取缓存中userId
+            this.userId = this.route.query.id
+            // 初始化信息加载
+            this.util.ajax.get('/admin/sysUser/getUserById.do?alert=0&id='+this.userId).then(e=> {
                 this.nickName = e.bean.nickName
                 this.avatar = e.bean.photo	
                 this.signature = e.bean.signature
@@ -85,23 +87,28 @@
         // mounted () { 
         // },
         methods:{
-            
+            // 网店
             shop(){
-                console.log('111111111111111111111')
+                // console.log('111111111111111111111')
                 this.$router.push('/switch')
             },
+            // 订单
             order(){
                 this.$router.push('/order_list_buyer')
             },
+            // 购物车
             shoppingCart(){
                 this.$router.push('/shopping-cart')
             },
+            // 查看更多信息
             moreInfo(){
                 this.$router.push('/more_info')
             },
+            // 邀请
             invite(){
                 this.$router.push('/invite')
             },
+            // 设置
             set_up(){
                 this.$router.push('/set_up')
             },
