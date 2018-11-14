@@ -22,7 +22,11 @@
             <div class="xingbie m1">
                 <div class="word">性别</div>
                 <div class="pic">
-                    <span style='color:#fff'>男</span>
+                    <span style='color:#fff'>
+                        <select  v-on:change="chooseSex" v-model="indexId" >
+                            <option v-for="item in sexList" v-bind:value="item.indexId" :key='item.label'>{{item.name}}</option>
+                        </select>
+                    </span>
                     <span>></span>
                 </div>
             </div>
@@ -52,25 +56,25 @@
             <div class="xuexiao m1">
                 <div class="word">学校名称</div>
                 <div class="pic">
-                    <input type="text" placeholder="请输入..."> 
+                    <input type="text" placeholder="请输入..." v-model="school_name" > 
                 </div>
             </div>
             <div class="aihao m1">
                 <div class="word ">兴趣爱好</div>
                 <div class="pic">
-                    <input type="text" placeholder="请输入..."> 
+                    <input type="text" placeholder="请输入..." v-model="interest"> 
                 </div>
             </div>
             <div class="xingming m1">
                 <div class="word">真实姓名</div>
                 <div class="pic">
-                    <input type="text" placeholder="请输入..."> 
+                    <input type="text" placeholder="请输入..." v-model="realname"> 
                 </div>
             </div>
             <div class="zhengjian m1">
                 <div class="word">证件号码</div>
                 <div class="pic">
-                    <input type="text" placeholder="请输入..."> 
+                    <input type="text" placeholder="请输入..." v-model="IDCard"> 
                 </div>
             </div>
         </div>
@@ -115,10 +119,27 @@ export default {
 
     data(){
         return{
-            avatar:null,
-            nickName:'',
-            telephone:'',
-            signature:'',
+            avatar:null,//头像
+            nickName:'',//昵称
+            telephone:'',//手机号
+            signature:'',//个性标签
+            sexList: [//性别
+                        {
+                            indexId: 0,
+                            name: '女'
+                        },
+                        {
+                            indexId: 1,
+                            name: '男'
+                        },
+            ],
+            sex_id:null,
+            info_id:null,//用户ID
+            realname:null,//真实姓名
+            indexId:null,
+            school_name:null,//学校
+            interest:null,//兴趣爱好
+            IDCard:null//身份证
         }
 
     },
@@ -129,7 +150,12 @@ export default {
             this.telephone = e.bean.phone
             this.signature = e.bean.signature
             this.avatar = e.bean.photo	
-            
+            this.info_id = e.bean.id
+            this.realname = e.bean.realname
+            this.sex_id = e.bean.sex
+            this.school_name = e.bean.sex
+            this.interest = e.bean.interest
+            this.IDCard = e.bean.IDCard
          }) 
         
     },
@@ -149,13 +175,36 @@ export default {
                 }
             });
         },
+        //选择性别
+        chooseSex(event){
+            
+            this.sex_id = event.target.value
+            // if(this.sex_id==1){
+            //     this.label = '男'
+            // }
+            // console.log(event)
+        },
         // 选择类别
         chooseType(){
 
         },
         // 保存信息
         toSaveInfo(){
-
+            let _p = {
+                id:this.info_id,
+                realname:this.realname,
+                sex:this.sex_id,
+                school_name:this.school_name,
+                interest:this.interest,
+                IDCard:this.IDCard
+            }
+            this.util.ajax.post('/admin/users/save.do',_p).then(e=> {
+                if(e.success == true){
+                    this.Toast(e.msg)
+                    this.$router.push('/personal_center')
+                    console.log(e.msg)
+                }
+            })
         }
             
 

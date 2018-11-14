@@ -10,7 +10,7 @@
                     <div class="nickname ">{{nickName}}</div>
                     <div v-if='!signature' class="signature ">待我强大之时，便是你噩梦的开始</div>
                     <div v-else class="signature ">{{signature}}</div>
-                    <div class="info_content jiange" @click="gengduoziliao">
+                    <div class="info_content jiange" @click="moreInfo">
                         <span class="info">查看更多资料</span>
                         <span class="drop-down">
                             <img src="../../static/images/xialasanjiao@2x.png" >
@@ -21,26 +21,26 @@
             <div class="menu_content ">
                 <div class="content_caidan">
                     <div class="menu content">
-                        <a href="http://59.110.169.175:9011/copyright/index.html#/reg_list">
+                        <a href="http://59.110.169.175:9011/copyright/index.html#/reg_list"></a>
                         <img class="lcon" src="../../static/images/banquan@2x.png" >
                         <span class="word">版权</span>
                     </div>
                     <p class="xian"></p>
-                    <div class="menu wangdian" @click="wangdian">
+                    <div class="menu wangdian" @click="shop">
                         <img class="lcon"   src="../../static/images/gerenw@2x.png" >
                         <span class="word">网店</span>
                     </div>
                     <p class="xian"></p>
-                    <div class="menu dingdan" @click="dingdan">
+                    <div class="menu dingdan" @click="order">
                         <img class="lcon" src="../../static/images/dingdan@2x.png">
                         <span class="word">订单</span>
                     </div>
                     <p class="xian"></p>
-                    <div class="menu gouwuche" @click="gouwuche" >
+                    <div class="menu gouwuche" @click="shoppingCart" >
                         <img class="lcon" src="../../static/images/gouwuche@2x.png" >
                         <span class="word">购物车</span>
                     </div>
-                    <div class="menu jiange" @click="yaoqing">
+                    <div class="menu jiange" @click="invite">
                         <img class="lcon" src="../../static/images/yaoqing@2x.png" >
                     <span class="word">邀请</span>
                     </div>
@@ -61,7 +61,7 @@
 </style>
 
 <script>
-import BScroll from 'better-scroll'
+// import BScroll from 'better-scroll'
 
     export default {
         data(){
@@ -86,25 +86,25 @@ import BScroll from 'better-scroll'
         // },
         methods:{
             
-            wangdian(){
+            shop(){
                 console.log('111111111111111111111')
                 this.$router.push('/switch')
             },
-            dingdan(){
+            order(){
                 this.$router.push('/order_list_buyer')
             },
-            gouwuche(){
+            shoppingCart(){
                 this.$router.push('/shopping-cart')
             },
-            gengduoziliao(){
+            moreInfo(){
                 this.$router.push('/more_info')
             },
-            yaoqing(){
+            invite(){
                 this.$router.push('/invite')
             },
             set_up(){
                 this.$router.push('/set_up')
-            }
+            },
         }
     }
 </script>

@@ -26,10 +26,10 @@
                             <span class="mima l1">
                                 <input type="text" id="input_pwd" placeholder="请输入密码" maxlength="16"  v-model="dl_mima" autofocus/>
                                 <img v-show="is_show"  @click="handle_click_show"  src="../../static/images/xianshiyanjing@2x.png" >
-                                <img v-show="!is_show" @click="handle_click_hide"  src="../../static/images/mimayincang@2x.png" >
+                                <img v-show="!is_show" @click="handle_click_hide"  src="../../static/images/yincangyanjing@2x.png" >
                             </span>
                         </div>
-                        <div class="forget">忘记密码？</div>
+                        <div class="forget" >忘记密码？</div>
                         
                     </div>
                     <div class="denglu_btn">
