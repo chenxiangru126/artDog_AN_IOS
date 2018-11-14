@@ -133,7 +133,7 @@ export default {
          }) 
         
     },
-    methods:{
+    methods:{ 
         // 上传头像
         trigger_file() {
             // debugger
