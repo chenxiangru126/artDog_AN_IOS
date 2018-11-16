@@ -51,6 +51,9 @@ export default {
 
         }
     },
+    mounted(){
+        this.util.ajax.get('/admin/chatroom/chatInfoList.do')
+    },
     methods:{
         notification(){
             this.$router.push('/notification_message')

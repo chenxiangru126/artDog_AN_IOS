@@ -10,8 +10,8 @@
             
         </div>
         <div class="search_content">
-            <div class="search_box"><img src="../../static/images/sousuo@2x.png" ></div>
-            <div class="xiaoxi"><img src="../../static/images/xiaoxi@2x.png" ></div>
+            <div class="search_box" @click="search_hot" ><img src="../../static/images/sousuo@2x.png" ></div>
+            <div class="xiaoxi" @click="my_news" ><img src="../../static/images/xiaoxi@2x.png" ></div>
             <div class="personal" @click="personal" ><img src="../../static/images/wode@2x.png" ></div>
         </div>
 
@@ -33,21 +33,21 @@
             }
         },
         created(){
-           znt.statusBarStyle({
+        //    znt.statusBarStyle({
 
-                // userId:"111",
-                style:'Light',
+        //         // userId:"111",
+        //         style:'Light',
                 
-                success:function(res){
+        //         success:function(res){
 
-                    alert(res.msg);
-                },
-                fail:function(res){
-                    alert(res.msg)
-                },
-                cancel:function(){
-                }
-            });
+        //             alert(res.msg);
+        //         },
+        //         fail:function(res){
+        //             alert(res.msg)
+        //         },
+        //         cancel:function(){
+        //         }
+        //     });
             
  
         },
@@ -111,8 +111,17 @@
                 
                 
                 
+            },
+            
+            search_hot(){
+            this.$router.push('/search_hot')
+            },
+            my_news(){
+                this.$router.push('/my_news')
             }
-        }
+        },
+        
+
     }
 </script>
 
