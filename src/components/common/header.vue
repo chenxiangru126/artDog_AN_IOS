@@ -108,6 +108,8 @@ import order_list_sellerVue from '../order/order_list_seller.vue';
                 this.$router.push('/switch')
               }else if( this.route_name=='order_pay'){
                 this.$router.push('/order_list_buyer')
+              }else if(this.route_name=='personal_center'){
+                  this.$router.push('/home_page')
               }else{
                   this.$router.go(-1)
               }

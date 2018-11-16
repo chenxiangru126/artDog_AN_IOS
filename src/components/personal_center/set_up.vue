@@ -58,7 +58,7 @@ export default {
             znt.logout({
                 success:function(res){
                 alert("成功"+res.msg);
-                this.$router.push('home_page')
+                _this.$router.push('/home_page')
                 },
                 fail:function(res){
                 alert("失败"+res.msg)
