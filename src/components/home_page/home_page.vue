@@ -60,23 +60,23 @@
                 
             },
             img_shop(){
-                znt.statusBarStyle({
+            //     znt.statusBarStyle({
 
-                // userId:"111",
-                style:'Light',
+            //     // userId:"111",
+            //     style:'Light',
                 
-                success:function(res){
+            //     success:function(res){
 
-                    alert(res.msg);
-                },
-                fail:function(res){
-                    alert(res.msg)
-                },
-                cancel:function(){
-                }
-            });
+            //         alert(res.msg);
+            //     },
+            //     fail:function(res){
+            //         alert(res.msg)
+            //     },
+            //     cancel:function(){
+            //     }
+            // });
                 // var that = this;
-                // this.$router.push('/goods-class')
+                // this.$router.push('/goods-class')22
                 this.$router.push('/ceshi')
             },
             personal(){
@@ -84,8 +84,8 @@
                 znt.getCacheUserInfo({
                     // userId:"111",
                     success:function(res){
-                        alert('token是否有值'+_this.token)
-                        alert("用户信息"
+                        // alert('token是否有值'+_this.token)
+                        alert("登录状态:::"+res.isLogin+"用户信息"
                         +res.userInfo.token+res.userInfo.mobile);
                         _this.token = res.userInfo.token
                         _this.userId = res.userInfo.userId
@@ -93,7 +93,12 @@
                         if(_this.token == '' || _this.token == undefined){
                             _this.$router.push('/login')
                         }else{
-                            _this.$router.push('/personal_center')
+                             _this.$router.push({
+                                path:'/personal_center',
+                                query:{
+                                    id:_this.userId
+                                }
+                            })
                         }
                     },
                     

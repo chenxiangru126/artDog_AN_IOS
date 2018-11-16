@@ -26,10 +26,10 @@
                             <span class="mima l1">
                                 <input type="text" id="input_pwd" placeholder="请输入密码" maxlength="16"  v-model="dl_mima" autofocus/>
                                 <img v-show="is_show"  @click="handle_click_show"  src="../../static/images/xianshiyanjing@2x.png" >
-                                <img v-show="!is_show" @click="handle_click_hide"  src="../../static/images/yincangyanjing@2x.png" >
+                                <img v-show="!is_show" @click="handle_click_hide"  src="../../static/images/mimayincang@2x.png" >
                             </span>
                         </div>
-                        <div class="forget" >忘记密码？</div>
+                        <div class="forget">忘记密码？</div>
                         
                     </div>
                     <div class="denglu_btn">
@@ -229,6 +229,7 @@ export default {
             }
         },
         zhuce_btn(){
+            let _this = this
             let phone = this.tel_phone;
             let code = this.yan_code;
             let password = this.mi_code;
@@ -252,7 +253,23 @@ export default {
                     
                     if(e.success == true){
                         alert(e.msg)
-                        this.$router.push('/home_page')    
+                        znt.cacheUserInfo({ // userId:"111",
+                            token:e.token,
+                            userId: e.token,
+                            mobile: phone,
+                            success:function(res){
+
+                                alert(res.msg);
+                                _this.$router.push('/home_page')
+                                    
+                            },
+                            fail:function(res){
+                                alert(res.msg)
+                            },
+                            cancel:function(){
+                            }
+                        });
+                        // this.$router.push('/home_page')    
                     }else{
                         alert('注册失败')
                     }

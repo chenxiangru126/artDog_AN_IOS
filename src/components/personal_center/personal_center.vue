@@ -20,11 +20,14 @@
             </div>           
             <div class="menu_content ">
                 <div class="content_caidan">
+                    <a href="http://59.110.169.175:9011/copyright/index.html#/reg_list" style='text-decoration: none;display: block;'>
                     <div class="menu content">
-                        <a href="http://59.110.169.175:9011/copyright/index.html#/reg_list"></a>
+                        
                         <img class="lcon" src="../../static/images/banquan@2x.png" >
                         <span class="word">版权</span>
+                        
                     </div>
+                    </a>
                     <p class="xian"></p>
                     <div class="menu wangdian" @click="shop">
                         <img class="lcon"   src="../../static/images/gerenw@2x.png" >
@@ -66,15 +69,38 @@
     export default {
         data(){
             return{
-                avatar:null,
-                nickName:'',
-                signature:''
-
+                avatar:null,//头像
+                nickName:'',//昵称
+                signature:'',//个性签名
+                userId:''//用户id
             }
         },
+        created(){
+            let _this = this
+            znt.getCacheUserInfo({
+                    // userId:"111",
+                    success:function(res){
+                        // alert('token是否有值'+_this.token)
+                        alert("登录状态:::"+res.isLogin+"用户信息"
+                        +res.userInfo.token+res.userInfo.mobile);
+                        // _this.token = res.userInfo.token
+                        _this.userId = res.userInfo.userId
+                        // _this.mobile = res.userInfo.mobile
+                        
+                    },
+                    
+                    fail:function(res){
+                    alert(res.msg)
+                    },
+                    cancel:function(){
+                    }
+                }) 
+        },
         mounted(){
-        // 初始化信息加载
-            this.util.ajax.get('/admin/sysUser/getUserById.do?alert=0').then(e=> {
+            // 获取缓存中userId
+            // this.userId = this.$route.query.id
+            // 初始化信息加载
+            this.util.ajax.get('/admin/sysUser/getUserById.do?alert=0&id='+this.userId).then(e=> {
                 this.nickName = e.bean.nickName
                 this.avatar = e.bean.photo	
                 this.signature = e.bean.signature
@@ -85,23 +111,28 @@
         // mounted () { 
         // },
         methods:{
-            
+            // 网店
             shop(){
-                console.log('111111111111111111111')
+                // console.log('111111111111111111111')
                 this.$router.push('/switch')
             },
+            // 订单
             order(){
                 this.$router.push('/order_list_buyer')
             },
+            // 购物车
             shoppingCart(){
                 this.$router.push('/shopping-cart')
             },
+            // 查看更多信息
             moreInfo(){
                 this.$router.push('/more_info')
             },
+            // 邀请
             invite(){
                 this.$router.push('/invite')
             },
+            // 设置
             set_up(){
                 this.$router.push('/set_up')
             },
