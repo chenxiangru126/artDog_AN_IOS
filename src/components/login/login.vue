@@ -24,12 +24,12 @@
                         <div class="denglu_bottom">
                             <span class="mima_pic"><img src="../../static/images/password@2x.png"></span>
                             <span class="mima l1">
-                                <input type="text" id="input_pwd" placeholder="请输入密码" maxlength="16"  v-model="dl_mima" autofocus/>
+                                <input type="password" id="input_pwd" placeholder="请输入密码" maxlength="16"  v-model="dl_mima" autofocus/>
                                 <img v-show="is_show"  @click="handle_click_show"  src="../../static/images/xianshiyanjing@2x.png" >
-                                <img v-show="!is_show" @click="handle_click_hide"  src="../../static/images/mimayincang@2x.png" >
+                                <img v-show="!is_show" @click="handle_click_hide"  src="../../static/images/yincangyanjing@2x.png" >
                             </span>
                         </div>
-                        <div class="forget">忘记密码？</div>
+                        <div class="forget" @click="retrieve_password">忘记密码？</div>
                         
                     </div>
                     <div class="denglu_btn">
@@ -58,8 +58,9 @@
                         <div class="denglu_bottom">
                             <span class="mima_pic"><img src="../../static/images/password@2x.png"></span>
                             <span class="mima l1">
-                                <input type="text" placeholder="请输入8位字母或数字" maxlength="16" v-model="mi_code">
-                                <img src="../../static/images/xianshiyanjing@2x.png" >
+                                <input type="password" id="input_pwd1" placeholder="请输入8位字母或数字" maxlength="16"  v-model="mi_code" autofocus/>
+                                <img v-show="is_show1"  @click="handle_click_show1"  src="../../static/images/xianshiyanjing@2x.png" >
+                                <img v-show="!is_show1" @click="handle_click_hide1"  src="../../static/images/yincangyanjing@2x.png" >
                             </span>
                         </div>
                         <!-- <div class="forget">忘记密码？</div> -->
@@ -98,11 +99,12 @@ export default {
             mi_code:null,//注册的密码
             dl_phone:'',//登录手机号
             dl_mima:null,//登录密码
-            is_show:true//密码显示隐藏
+            is_show:false,//密码显示隐藏
+            is_show1:false//密码显示隐藏
         }
     },
     methods: {
-        
+        //登录页
         //显示密码
         handle_click_show(){
             this.is_show = !this.is_show;
@@ -112,6 +114,17 @@ export default {
         handle_click_hide(){
             this.is_show = !this.is_show;
            $("#input_pwd").attr('type','text')
+        },
+        //注册页
+        //显示密码
+        handle_click_show1(){
+            this.is_show1 = !this.is_show1;
+            $("#input_pwd1").attr('type','password')
+        },
+        //密码隐藏
+        handle_click_hide1(){
+            this.is_show1 = !this.is_show1;
+            $("#input_pwd1").attr('type','text')
         },
 
         //登录页
@@ -124,7 +137,7 @@ export default {
             this.isZhuShow=true
             this.isLoginShow=false
         },
-        //登录注册按钮
+        //登录按钮
         denglu_btn(){
             let _this = this
             let phone = this.dl_phone
@@ -141,8 +154,7 @@ export default {
             this.util.ajax.get('/admin/users/toDenglu.do?phone='+this.dl_phone+'&password='+this.dl_mima).then(e=>{
                 let _this = this
                 if(e.success == true){
-                    alert(e.msg)
-                    console.log(e.token)
+                    this.Toast(e.msg)
                     // console.log('昵称：：：'+e.user.nickName)
                     console.log('手机号：：：'+phone)
                     // znt.cacheUserAccount({
@@ -173,7 +185,9 @@ export default {
                         // alert("失败"+res.msg)
                         // },
                         // cancel:function(){
-                        }
+                    }else{
+                        this.Toast('手机号或密码错误')
+                    }
                 });
                 
 
@@ -252,7 +266,7 @@ export default {
               this.util.ajax.get('/admin/users/regOrUpdate.do?phone='+phone+'&code='+code+'&password='+password+'&updateType='+updateType).then(e=>{
                     
                     if(e.success == true){
-                        alert(e.msg)
+                        this.Toast(e.msg)
                         znt.cacheUserInfo({ // userId:"111",
                             token:e.token,
                             userId: e.token,
@@ -277,6 +291,9 @@ export default {
               })
 
             }
+        },
+        retrieve_password(){
+            this.$router.push('/retrieve_password')
         }
 
     }
