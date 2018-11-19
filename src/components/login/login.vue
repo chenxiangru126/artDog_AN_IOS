@@ -24,7 +24,7 @@
                         <div class="denglu_bottom">
                             <span class="mima_pic"><img src="../../static/images/password@2x.png"></span>
                             <span class="mima l1">
-                                <input type="password" id="input_pwd" placeholder="请输入密码" maxlength="16"  v-model="dl_mima" autofocus/>
+                                <input type="password" id="input_pwd" placeholder="请输入密码" maxlength="16"  v-model="dl_mima" />
                                 <img v-show="is_show"  @click="handle_click_show"  src="../../static/images/xianshiyanjing@2x.png" >
                                 <img v-show="!is_show" @click="handle_click_hide"  src="../../static/images/yincangyanjing@2x.png" >
                             </span>
@@ -58,7 +58,7 @@
                         <div class="denglu_bottom">
                             <span class="mima_pic"><img src="../../static/images/password@2x.png"></span>
                             <span class="mima l1">
-                                <input type="password" id="input_pwd1" placeholder="请输入8位字母或数字" maxlength="16"  v-model="mi_code" autofocus/>
+                                <input type="password" id="input_pwd1" placeholder="请输入8位字母或数字" maxlength="16"  v-model="mi_code" />
                                 <img v-show="is_show1"  @click="handle_click_show1"  src="../../static/images/xianshiyanjing@2x.png" >
                                 <img v-show="!is_show1" @click="handle_click_hide1"  src="../../static/images/yincangyanjing@2x.png" >
                             </span>
