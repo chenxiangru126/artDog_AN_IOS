@@ -11,7 +11,11 @@
         </div>
         <div class="search_content">
             <div class="search_box" @click="search_hot" ><img src="../../static/images/sousuo@2x.png" ></div>
-            <div class="xiaoxi" @click="my_news" ><img src="../../static/images/xiaoxi@2x.png" ></div>
+            <div class="xiaoxi" @click="my_news" >
+                <img src="../../static/images/xiaoxi@2x.png" >
+                <div class="red" v-show="hide"></div>
+                <!-- <div class="red" ></div> -->
+            </div>
             <div class="personal" @click="personal" ><img src="../../static/images/wode@2x.png" ></div>
         </div>
 
@@ -29,7 +33,10 @@
             return {
                 token:'',
                 userId:'',
-                mobile:''
+                mobile:'',
+                user_id:'',
+                count:'',//未读信息条数
+                hide:false
             }
         },
         created(){
@@ -52,10 +59,20 @@
  
         },
         mounted(){
+            // let user_id="096327b8-1cef-4103-bc6d-1dde3d594be300"
+            this.util.ajax.get('/admin/feedback/dataListes.do').then(e=>{
+                this.count = e.count
+                if(e.count==0){
+                    this.hide=true
+                }else{
+                    this.hide=false
+                }
+            })
             
         },
 
         methods:{
+
             img_copy(){
                 
             },
@@ -112,12 +129,13 @@
                 
                 
             },
-            
+
             search_hot(){
             this.$router.push('/search_hot')
             },
             my_news(){
                 this.$router.push('/my_news')
+                this.hide=false
             }
         },
         

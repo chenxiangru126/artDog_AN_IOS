@@ -21,11 +21,14 @@
             </div>
             <div class="xingbie m1">
                 <div class="word">性别</div>
+                <!-- <mt-picker :slots="slots" @change="onValuesChange" ></mt-picker>   -->
                 <div class="pic">
                     <span style='color:#fff'>
-                        <select  v-on:change="chooseSex" v-model="indexId" >
+                        <!-- <select  v-on:change="chooseSex" v-model="indexId" >
                             <option v-for="item in sexList" v-bind:value="item.indexId" :key='item.label'>{{item.name}}</option>
-                        </select>
+                        </select> -->
+                        <mt-picker :slots="slots"  ></mt-picker>
+
                     </span>
                     <span>></span>
                 </div>
@@ -110,6 +113,10 @@
 
 
 <script>
+import { Picker } from 'mint-ui';
+// Vue.component(Picker.name, Picker);
+
+ 
 
 import '../../znt.js' ;
 
@@ -123,23 +130,26 @@ export default {
             nickName:'',//昵称
             telephone:'',//手机号
             signature:'',//个性标签
-            sexList: [//性别
-                        {
-                            indexId: 0,
-                            name: '女'
-                        },
-                        {
-                            indexId: 1,
-                            name: '男'
-                        },
-            ],
+            // sexList: [//性别
+            //             {
+            //                 indexId: 0,
+            //                 name: '女'
+            //             },
+            //             {
+            //                 indexId: 1,
+            //                 name: '男'
+            //             },
+            // ],
             sex_id:null,
             info_id:null,//用户ID
             realname:null,//真实姓名
             indexId:null,
             school_name:null,//学校
             interest:null,//兴趣爱好
-            IDCard:null//身份证
+            IDCard:null,//身份证
+            value:'',
+  		    slots:[{values: ['年假', '事假', '病假', '婚假', '其他']}]
+
         }
 
     },
@@ -205,8 +215,12 @@ export default {
                     console.log(e.msg)
                 }
             })
+        },
+        onValuesChange(picker, values) {
+            this.value = values[0];
+            console.log(this.value)
         }
-            
+                
 
 
     }
