@@ -8,14 +8,14 @@
                 </div>
                 <div class="with_me">
                     <img src="../../static/images/yuwoxiangguan@2x.png" alt="">
-                    <div class="with_word">与我相关</div>
+                    <div class="with_word" >与我相关</div>
                 </div> 
             </div>
             <div class="tips">
-                <div class="tips_left">
-                    <div class="left_num" v-show="hide">{{count}}</div>
+                <div class="tips_left" v-show="hide">
+                    <div class="left_num" >{{count}}</div>
                 </div>
-                <div class="tips_right"></div>
+                <div class="tips_right" style="display:none"></div>
             </div>
         </div>
         
@@ -65,13 +65,13 @@ export default {
             this.count=e.count
             console.log(e.count)
             // debugger
-            // if(e.count>0){
-            //     this.hide=true
-            //     console.log(this.hide)
-            // }else{
-            //     this.hide=false
-            //     console.log(this.hide)
-            // }
+            if(e.count>0){
+                this.hide=true
+                console.log(this.hide)
+            }else{
+                this.hide=false
+                console.log(this.hide)
+            }
         })
     },
     methods:{
