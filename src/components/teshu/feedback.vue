@@ -1,7 +1,8 @@
 <template>
     <div>
         <div class="text-area">
-            <textarea name="" id="" cols="30" rows="10" v-model="instruction"></textarea>
+            <input type="file" class="hide file" accept="image/*" @change="upload_img">
+            <textarea name="" id="" cols="30" rows="10" v-model="content"></textarea>
             <div class="upload-area flex-h">
                 <p class="add-icon" @click='trigger_file'></p>
                 <p class="flex-v flex-j-c" v-for="it in upimg_show_items" :key="it" v-if='upimg_show_items.length>0'>
@@ -10,7 +11,7 @@
             </div>
         </div>
         <div class="submit_content">
-            <div class="submit_btn">提交</div>
+            <div class="submit_btn" @click="submit_feedback">提交</div>
         </div>
     </div>
 </template>
@@ -90,14 +91,34 @@ export default {
         return{
             instruction:null,
             url:null,
-            upimg_show_items:null,
+            upimg_show_items:[],
+            content:null,
 
 
         }
     },
     methods:{
-        trigger_file(){
-            
+        upload_img(e) {
+            let formData = new FormData();
+            formData.append('file', e.target.files[0]);
+            formData.append('type', 'test');
+            this.util.ajax.post("/mall/shop/upload.do", formData).then(e => {
+                this.upimg_show_items.push(e.data.urlShow);
+            }).catch()
+        },
+        trigger_file() {
+            const file = document.querySelector(".file");
+            file.click();
+        },
+        submit_feedback(){
+            // let user_id = "fd1e37eb-b9a8-4744-908a-d32abd472eea"
+            let content = this.content
+            let url = this.upimg_show_items
+            this.util.ajax.get('/admin/feedback/save.do?content='+this.content+'&url='+this.upimg_show_items+'&user_id=fd1e37eb-b9a8-4744-908a-d32abd472eea').then(e=>{
+                if(e.success == true){
+                    this.Toast(e.msg)
+                }
+            })
         }
     }
     

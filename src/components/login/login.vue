@@ -126,7 +126,7 @@ export default {
             this.is_show1 = !this.is_show1;
             $("#input_pwd1").attr('type','text')
         },
-
+//
         //登录页
         showToggle() {
             this.isLoginShow=true
