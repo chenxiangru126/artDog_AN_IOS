@@ -204,7 +204,7 @@ export default {
             interest:null,//兴趣爱好
             IDCard:null,//身份证
             identity:null,//类别
-            
+            //
             //选择性别
             pleaseChoose:'请选择',
             isSex:false,//
