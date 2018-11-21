@@ -114,15 +114,15 @@
             // 网店
             shop(){
                 // console.log('111111111111111111111')
-                this.$router.push('/switch')
+                this.$router.push('/goods-class')
             },
             // 订单
             order(){
-                this.$router.push('/order_list_buyer')
+                this.$router.push('/goods-class')
             },
             // 购物车
             shoppingCart(){
-                this.$router.push('/shopping-cart')
+                this.$router.push('/goods-class')
             },
             // 查看更多信息
             moreInfo(){
