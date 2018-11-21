@@ -9,6 +9,47 @@
         top: 1.9rem;
         right: 1.666667rem;
     }
+    .mengceng_content{
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        // background: rgba(60, 58, 58,0.9);
+        // background: rgba(53, 52, 52, 0.8);
+        z-index: 100000;
+        bottom: 0;
+        .mengceng_back{
+            position: absolute;
+            top: 2rem;
+            left: 1rem;
+            img{
+                
+                font-size: 2rem;
+                width:  2rem;
+                height:  2rem;
+                color: #FFFFFF;
+            }
+            
+        }
+        .mengceng_img{
+            width: 20rem;
+            height: 40rem;
+            img{
+                width: 25rem;
+                height: 44.466667rem;
+                opacity:0.3;
+                font-weight: 700;
+            }
+        }
+        .mengceng{
+            position: absolute;
+            font-size: 2.4rem;
+            color: #f3f3f3;
+            top: 10.933333rem;
+            left: 7.7rem;
+            line-height: 2.466667rem;
+        }
+    }
     .goods_nav{
         display: flex;
         justify-content: space-between;
@@ -41,8 +82,16 @@
         }
        
     }
-    .lsit_t{
-        position: absolute;
+    .list_t{
+        //蒙层前
+        // position: absolute;
+        // width: 100%;
+        // padding: 0 .8rem;
+        // margin-top: 3rem;
+
+        //蒙层后
+        position: fixed;
+        top: 4.533333rem;
         width: 100%;
         padding: 0 .8rem;
         margin-top: 3rem;
@@ -62,17 +111,27 @@
                 height: 12.066667rem;
                 position: relative;
                 .img{
+                    // position: absolute;
+                    // width: 100%;
+                    // height: 100%;
+                    // object-fit:cover;
+                    // // height: 11.625rem;
+                    // -webkit-clip-path:
+                    //     polygon(
+                    //         13px 0, calc(100% - 13px) 0, 100% 13px,
+                    //         100% calc(100% -  13px), calc(100% - 13px) 100%,
+                    //         13px 100%, 0 calc(100% - 13px), 0 13px
+                    //     );
+                    
+                    width: auto;
+                    height: auto;
+                    max-width: 100%;
+                    max-height: 100%;
                     position: absolute;
-                    width: 100%;
-                    height: 100%;
-                    object-fit:cover;
-                    // height: 11.625rem;
-                    -webkit-clip-path:
-                        polygon(
-                            13px 0, calc(100% - 13px) 0, 100% 13px,
-                            100% calc(100% -  13px), calc(100% - 13px) 100%,
-                            13px 100%, 0 calc(100% - 13px), 0 13px
-                        );
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%,-50%,0);
+                    -webkit-transform: translate3d(-50%,-50%,0);
                     }
                 .tixing{
                     position: absolute;
