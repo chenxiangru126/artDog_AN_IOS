@@ -41,7 +41,7 @@ const get_usr_info=resolve=>{
                 znt.getCacheUserInfo({
                     // userId:"111",
                     success:function(res){
-                        alert("登录状态"+"用户信息"+res.userInfo.token+res.userInfo.mobile);
+                        // alert("登录状态"+"用户信息"+res.userInfo.token+res.userInfo.mobile);
                         // if(res.userInfo.token){
                             userToken = {
                                 token: res.userInfo.token || '',

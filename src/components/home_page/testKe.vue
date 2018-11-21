@@ -60,7 +60,7 @@
       <button @click='test16'>扫码</button>
         
       <!-- 分享按钮 -->
-      <!-- <button @click='test17'>分享</button> -->
+      <button @click='test17'>分享</button>
         
       <!-- 获取通讯录按钮 -->
       <button @click='test18'>获取通讯录</button>
@@ -70,6 +70,8 @@
 
       <!-- 关闭APP按钮 -->
       <button @click='test20'>关闭APP</button>
+
+     
   </div>
   
 </template>
@@ -380,21 +382,21 @@
                 }
             });
         },
-        // // 分享
-        // test17(){
-        //     znt.share({
-        //         title:'艺狗APP',
-        //         desc:'一个专为设计家打造的艺术品电商平台，涵盖艺术类、版权产品、平台服务的电子商务平台',
-        //         imgUrl:'',
-        //         link:'',
-        //         success:function(res){
-        //             alert(res.resCode)
-        //         },
-        //         fail:function(res){
-        //             alert(res.msg)
-        //         }
-        //     });
-        // },
+        // 分享
+        test17(){
+            znt.share({
+                title:'艺狗APP',
+                desc:'一个专为设计家打造的艺术品电商平台，涵盖艺术类、版权产品、平台服务的电子商务平台',
+                imgUrl:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542694415495&di=0ace189b351584bdb4466032dccde7bc&imgtype=0&src=http%3A%2F%2Fpic.downcc.com%2Fupload%2F2018-1%2F201818959246216.jpg',
+                link:'www.baidu.com',
+                success:function(res){
+                    alert(res.msg)
+                },
+                fail:function(res){
+                    alert(res.msg)
+                }
+            });
+        },
         // 通讯录
         test18(){
             znt.contactList({
@@ -425,6 +427,7 @@
                
             });
         },
+        
 
     }
   }

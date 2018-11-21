@@ -7,8 +7,8 @@
                     <div class="img_shop" @click="img_shop" ><img src="../../static/images/jiaoyidianshang@2x.png" ></div>
                 </div>    
             </div>
-            
-        </div>
+             
+        </div> 
         <div class="search_content">
             <div class="search_box" @click="search_hot" ><img src="../../static/images/sousuo@2x.png" ></div>
             <div class="xiaoxi" @click="my_news" >
@@ -60,7 +60,7 @@
         },
         mounted(){
             // let user_id="096327b8-1cef-4103-bc6d-1dde3d594be300"
-            this.util.ajax.get('/admin/feedback/dataListes.do').then(e=>{
+            this.util.ajax.get('/admin/feedback/dataListes.do?alert=0').then(e=>{
                 this.count = e.count
                 if(e.count==0){
                     this.hide=true
@@ -102,8 +102,8 @@
                     // userId:"111",
                     success:function(res){
                         // alert('token是否有值'+_this.token)
-                        alert("登录状态:::"+res.isLogin+"用户信息"
-                        +res.userInfo.token+res.userInfo.mobile);
+                        // alert("登录状态:::"+res.isLogin+"用户信息"
+                        // +res.userInfo.token+res.userInfo.mobile);
                         _this.token = res.userInfo.token
                         _this.userId = res.userInfo.userId
                         _this.mobile = res.userInfo.mobile
