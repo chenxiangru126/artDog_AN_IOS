@@ -9,6 +9,11 @@
                 </div>
             </div> 
         </div>
+        <div class="mengceng_content" v-show="mengceng">
+            <div class="mengceng_img"><img src="../../static/images/beijingtu@2x.png" alt=""></div>
+            <div class="mengceng">即将开放 <br>敬请期待</div>
+            <div class="mengceng_back" @click="mengceng_back"><img src="../../static/images/left.svg" alt=""></div>
+        </div>
         <div class=" _right flex-v flex-j-c flex-a-c"  @click="goods_search">
                 <img src="../../static/images/search.svg" alt="" class="w1_5 h1_5">
         </div>
@@ -17,7 +22,7 @@
             <div class="classification" @click="onClassification">{{navigation2}}<a v-if="isDian">...</a><span></span></div>
             <div class="price" @click="onPrice">价 格<span></span></div>
         </div>
-        <div class="lsit_t"    v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="50" ref="viewbox">
+        <div class="list_t"    v-infinite-scroll="loadMore" infinite-scroll-disabled="loading" infinite-scroll-distance="50" ref="viewbox">
             <div class="list_c" v-for="(item,index) in list" :key="index" @click="go_details(item.id)">
                 <div class="list_img">
                     <img class="img" v-bind:src="item.imgUrl"/>
@@ -137,7 +142,8 @@ import axios from 'axios';
                 searchType:"",
                 navigation1:"商品",
                 navigation2:"分类",
-                isDian:false
+                isDian:false,
+                mengceng:true,//蒙层
             }
         },
          components: {
@@ -271,6 +277,9 @@ import axios from 'axios';
               this.list = [];
               this.currentPage = 1;
             //   this.initList();
+          },
+          mengceng_back(){
+              this.$router.go(-1)
           },
           on_sp_goods(n,e){
             //   debugger
