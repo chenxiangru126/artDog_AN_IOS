@@ -47,12 +47,14 @@ export default {
             // create_date:''
             list:[],
             count:'',//未读消息数量
-            hide:false//未读消息显示与隐藏
-
+            hide:false,//未读消息显示与隐藏
+            user_id:''
         }
     },
     mounted(){
-        this.util.ajax.get('/admin/chatroom/chatInfoList.do').then(e=>{
+        this.user_id = this.$route.query.id,
+        // 列表
+        this.util.ajax.get('/admin/chatroom/chatInfoList.do&userId='+this.user_id).then(e=>{
             for(let i in e.rows){
                 this.list=e.rows
             }
@@ -61,7 +63,8 @@ export default {
             // this.fromName = e.rows[0].fromName
             // this.create_date = e.rows[0].create_date
         });
-        this.util.ajax.get('/admin/feedback/dataListes.do').then(e=>{
+        // 详情
+        this.util.ajax.get('/admin/feedback/dataListes.do?alert=0&user_id='+this.user_id).then(e=>{
             this.count=e.count
             console.log(e.count)
             // debugger
@@ -76,7 +79,13 @@ export default {
     },
     methods:{
         notification(){
-            this.$router.push('/notification_message')
+            this.$router.push({
+                path:'/notification_message',
+                query:{
+                    id:this.user_Id
+                }
+            })
+            // this.$router.push('/notification_message')
         }
     }
 }

@@ -342,7 +342,7 @@ export default {
                 if(e.success == true){
                     this.Toast(e.msg)
                     // this.$router.push('/personal_center')
-                    console.log(e.msg)
+                    // console.log(e.msg)
                 }
             })
         },

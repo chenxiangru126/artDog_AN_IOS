@@ -45,7 +45,7 @@ import order_list_sellerVue from '../order/order_list_seller.vue';
         data() {
             return {
                 title: this.$route.meta.title,
-                isIos: isAndroidOrIos() == 1 ? true : false,
+                isIos: isAndroidOrIos() > -1 ? true : false,
                 //地址列表-删除功能-【全选／全不选】状态切换-参数
                 address_checked: false, //false 全不选  true 全选
                 shopping_checked: false, //false 全不选  true 全选
@@ -71,7 +71,22 @@ import order_list_sellerVue from '../order/order_list_seller.vue';
         created() {
             // 定义全局函数，负责接收平级组件传递的参数
             this.$root.eventHup.$on('childEvent', this.process_child_event);
+            // znt.statusBarStyle({
 
+            //     // userId:"111",
+            //     style:'Light',
+                
+            //     success:function(res){
+
+            //         alert(res.msg);
+            //     },
+            //     fail:function(res){
+            //         alert(res.msg)
+            //     },
+            //     cancel:function(){
+            //     }
+            // });
+            
 
         },
         mounted() {
