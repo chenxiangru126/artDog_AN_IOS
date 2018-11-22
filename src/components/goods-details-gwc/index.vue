@@ -210,26 +210,26 @@
             })
         },
         // 这个是调用是否登录的函数
-        userGetinfo(fun){
-            if(location.href.indexOf('localhost')>-1){
-                return true;
-            }
-            var _this = this;
-            let objdata = iosObject.getUserInfo();
-            let jsondata = eval('(' + objdata + ')');
-            window.jsondata = jsondata;
-            axios.post("/mall/address/isHaveToken.do",{token:window.jsondata.token}).then(res=>{
-                let e = res.data;
-                if(e.code!=200){
-                    // 这个是没有登陆的时候返回到登陆页
-                    iosObject.goLogin();
-                    return false;
-                }else{
-                     fun();
-                     return true;
-                }
-            }).catch();
-        },
+        // userGetinfo(fun){
+        //     if(location.href.indexOf('localhost')>-1){
+        //         return true;
+        //     }
+        //     var _this = this;
+        //     let objdata = iosObject.getUserInfo();
+        //     let jsondata = eval('(' + objdata + ')');
+        //     window.jsondata = jsondata;
+        //     axios.post("/mall/address/isHaveToken.do",{token:window.jsondata.token}).then(res=>{
+        //         let e = res.data;
+        //         if(e.code!=200){
+        //             // 这个是没有登陆的时候返回到登陆页
+        //             iosObject.goLogin();
+        //             return false;
+        //         }else{
+        //              fun();
+        //              return true;
+        //         }
+        //     }).catch();
+        // },
 //--------------------------------------- //
 
 
@@ -259,9 +259,10 @@
         to_gwc(){
             let _t = this;
             
-            this.userGetinfo(function(){
-                _t.$router.push({path: '/shopping-list'});
-            })
+            // this.userGetinfo(function(){
+            //     _t.$router.push({path: });
+            // })
+            this.$router.push('/shopping-list')
         },
         ser_on(){
             let ur = '/index.html#/goods-details-gwc?id='+this.goodsInfo.id+'&isShare=1';

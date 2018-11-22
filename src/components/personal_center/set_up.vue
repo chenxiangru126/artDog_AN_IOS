@@ -2,28 +2,28 @@
     <div class="setUp_content">
         <div>
             <div class="setUp_box">
-                <div class="help">
-                    <span class="word" @click="help" >用户帮助</span>
+                <div class="help" @click="help">
+                    <span class="word"  >用户帮助</span>
                 </div>
             </div>
             <div class="setUp_box">
-                <div class="help">
-                    <span class="word" @click="feedback">意见反馈</span>
+                <div class="help" @click="feedback">
+                    <span class="word" >意见反馈</span>
                 </div>
             </div>
             <div class="setUp_box">
-                <div class="help">
-                    <span class="word" @click="retrieve_password">修改密码</span>
+                <div class="help" @click="retrieve_password">
+                    <span class="word" >修改密码</span>
                 </div>
             </div>
             <div class="setUp_box">
-                <div class="help">
-                    <span class="word" @click="about_we">关于我们</span>
+                <div class="help" @click="about_we">
+                    <span class="word" >关于我们</span>
                 </div>
             </div>
         </div>
-        <div class="tuichu_btn">
-            <div class="btn_word" @click="Logout">退出登录</div>
+        <div class="tuichu_btn"  @click="Logout">
+            <div class="btn_word">退出登录</div>
         </div>
     </div>
 </template>

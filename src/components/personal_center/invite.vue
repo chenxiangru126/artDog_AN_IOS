@@ -16,8 +16,8 @@
         <div class="fenxiang_pic">
             <span><img src="../../static/images/pengyouquan@2x.png" ></span>
             <span><img src="../../static/images/weixin@2x.png" ></span>
-            <span><img src="../../static/images/QQ@2x.png" ></span>
-            <span><img src="../../static/images/weibo@2x.png" ></span>
+            <!-- <span><img src="../../static/images/QQ@2x.png" ></span>
+            <span><img src="../../static/images/weibo@2x.png" ></span> -->
         </div>
     </div>
 </template>

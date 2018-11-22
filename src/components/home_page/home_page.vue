@@ -62,7 +62,7 @@
             // let user_id="096327b8-1cef-4103-bc6d-1dde3d594be300"
             this.util.ajax.get('/admin/feedback/dataListes.do').then(e=>{
                 this.count = e.count
-                if(e.count==0){
+                if(e.count>0){
                     this.hide=true
                 }else{
                     this.hide=false

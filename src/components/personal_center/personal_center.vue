@@ -5,7 +5,7 @@
                 <div class="xinxi_content">
                     <div class="touxiang ">
                         <img v-if='!avatar' src="../../static/images/gerenzhongxintouxiang@2x.png">
-                        <img v-else :src="'http://test.bjyishubiyeji.com:8080'+avatar" style="width: 4.7rem;height: 4.7rem;border-radius:50%" >
+                        <img v-else @click='openImg' :src="avatar" style="width: 4.7rem;height: 4.7rem;border-radius:50%" >
                     </div>
                     <div class="nickname ">{{nickName}}</div>
                     <div v-if='!signature' class="signature ">待我强大之时，便是你噩梦的开始</div>
@@ -65,7 +65,7 @@
 
 <script>
 // import BScroll from 'better-scroll'
-
+import {_alert,_confrim,_openimg} from '../../libs/ui';
     export default {
         data(){
             return{
@@ -102,7 +102,7 @@
             // 初始化信息加载
             this.util.ajax.get('/admin/sysUser/getUserById.do?alert=0&id='+this.userId).then(e=> {
                 this.nickName = e.bean.nickName
-                this.avatar = e.bean.photo	
+                this.avatar ='http://test.bjyishubiyeji.com:8080'+ e.bean.photo	
                 this.signature = e.bean.signature
                 
             }) 
@@ -136,6 +136,9 @@
             set_up(){
                 this.$router.push('/set_up')
             },
+            openImg(){
+                _openimg(this.avatar)
+            }
         }
     }
 </script>
