@@ -3,7 +3,7 @@
         <div class="ios_log" v-show="isIos"></div>
         <div class="w rela">
             <!-- <div class="_left" v-if='route_name=="switch"||route_name=="shopping_list"||route_name=="order_list_buyer"||route_name=="detailData"||route_name=="register"||route_name=="goods-class"||route_name=="goods-details-sCart" ||route_name=="help" ' @click='back_ios'></div> -->
-            <div  v-if='route_name=="home_page" ||route_name=="login" || route_name=="goods-class"' ></div>
+            <div  v-if='route_name=="home_page" ||route_name=="login" || route_name=="goods-class" || route_name=="search_hot"' ></div>
             <div class="_left" v-else  @click='back_event'></div>
             <!-- <div class="_left" v-else-if="route_name==goods-class" style="display:none" @click='back_event' ></div> -->
             <div class="w t-c _center">{{title_name}}</div>

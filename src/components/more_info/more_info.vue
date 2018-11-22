@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="nicheng m1">
-                <div class="word ">昵称</div>
+                <div class="word">昵称</div>
                 <div class="pic">
                     <input type="text" placeholder="请输入..." style='color:#fff' v-model="nickName"> 
                 </div>
@@ -336,9 +336,12 @@ export default {
                 phone:this.telephone,
                 identity:this.identity,
                 nickName:this.nickName,
+                signature:this.signature
                 
             }
-            this.util.ajax.get('/admin/users/save.do?realname='+this.realname+'&sex='+this.sex+'&id='+this.info_id+'&identity='+this.identity).then(e=> {
+            this.util.ajax.get('/admin/users/save.do?realname='+this.realname+'&sex='+this.sex+'&id='+this.info_id+'&school_name='
+            +this.school_name+'&interest='+this.interest+'&IDCard='+this.IDCard+'&phone='+this.telephone+'&identity='+this.identity+
+            '&nickName='+this.nickName+'&signature='+this.signature).then(e=> {
                 if(e.success == true){
                     this.Toast(e.msg)
                     // this.$router.push('/personal_center')
