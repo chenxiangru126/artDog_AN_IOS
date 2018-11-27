@@ -27,7 +27,6 @@
   }
   div,p,span{
       -webkit-user-select: none;
-      /* overflow-y: auto */
   }
   input,textarea{
       font-size: inherit;

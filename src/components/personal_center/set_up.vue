@@ -42,7 +42,7 @@ export default {
         },
         //跳修改密码
         retrieve_password(){
-            this.$router.push('/set_password')
+            this.$router.push('/retrieve_password')
         },
         //跳关于我们
         about_we(){

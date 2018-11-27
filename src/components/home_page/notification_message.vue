@@ -30,9 +30,9 @@ export default {
         }
     },
     mounted(){
-        let user_id = this.$route.query.id
+        let user_id=this.id
 
-        this.util.ajax.get('/admin/feedback/dataListes.do?alert=0&user_id='+user_id).then(e=>{
+        this.util.ajax.get('/admin/feedback/dataListes.do').then(e=>{
             this.id = e.rows[0].user_id
             for(let i in e.rows){
                 this.list =e.rows

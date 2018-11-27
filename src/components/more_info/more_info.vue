@@ -9,8 +9,8 @@
             <div class="touxiang_box m1">
                 <div class="word word_1"  >头像</div>
                 <div class="pic pic_1">
-                    <img v-if='!photo' @click="trigger_file" src="../../static/images/gerenzhongxintouxiang@3x.png" alt="">
-                    <img v-else-if='photo' :src="avatar" style="width: 3.7rem;height: 3.7rem;border-radius:50%"  @click="trigger_file"  >
+                    <img v-if='!avatar'  @click="trigger_file" src="../../static/images/gerenzhongxintouxiang@3x.png" alt="">
+                    <img v-else :src="'http://test.bjyishubiyeji.com:8080'+avatar" style="width: 3.7rem;height: 3.7rem;border-radius:50%"  @click="trigger_file"  >
                 </div>
             </div>
             <div class="nicheng m1">
@@ -192,27 +192,25 @@ export default {
 
     data(){
         return{
-            avatar:'',//头像
-            photo:'',//头像
-            userImage:null,//头像
+            avatar:null,//头像
             nickName:'',//昵称
             telephone:'',//手机号
             signature:'',//个性标签
-            sex_id:'',
-            info_id:'',//用户ID
-            realname:'',//真实姓名
-            indexId:'',
+            sex_id:null,
+            info_id:null,//用户ID
+            realname:null,//真实姓名
+            indexId:null,
             school_name:'',//学校
-            interest:'',//兴趣爱好
-            IDCard:'',//身份证
-            identity:'学生',//类别
+            interest:null,//兴趣爱好
+            IDCard:null,//身份证
+            identity:null,//类别
             //
             //选择性别
             pleaseChoose:'请选择',
             isSex:false,//
             choose_co:true,
-            sex:'',
-            listState:'',
+            sex:null,
+            listState:null,
             state_name: this.sex == 0 ? '女' : '男',
             
 
@@ -221,20 +219,19 @@ export default {
             Choose_Lb:'请选择',
             choose_co1:true,
             listLb:null,
-            userId:''
+
 
         }
 
     },
     created(){
-        this.userId = this.$route.query.id
+
         // 初始化信息加载
-        this.util.ajax.get('/admin/sysUser/getUserById.do?alert=0&id='+this.userId).then(e=> {
+        this.util.ajax.get('/admin/sysUser/getUserById.do?alert=0').then(e=> {
             this.nickName = e.bean.nickName
             this.telephone = e.bean.phone
             this.signature = e.bean.signature
-            this.avatar ='http://59.110.169.175:8080'+ e.bean.photo	
-            this.photo = e.bean.photo	
+            this.avatar = e.bean.photo	
             this.info_id = e.bean.id
             this.realname = e.bean.realname
             this.sex = e.bean.sex
@@ -242,66 +239,26 @@ export default {
             this.interest = e.bean.interest
             this.IDCard = e.bean.IDCard
             this.identity = e.bean.identity
-        
          }) 
         
     },
     methods:{ 
         // 上传头像
-
         trigger_file() {
-            var _this = this;
             // debugger
             znt.selectImage({
                 uploadUrl:"http://test.bjyishubiyeji.com:8080/admin/authCopyright/upload.do",
                 success:function(res){
-                    console.log(res.imgUrl)
-                    _this.avatar= res.imgUrl; 
-                    _this.photo = _this.avatar.replace('http://59.110.169.175:8080/uploadImgs','')
-                    // console(_this.avatar);
+                    this.avatar= res.imgUrl; //
+                    alert(res.imgUrl)
+                    alert(this.avatar);
                 },
                 fail:function(res){
                     alert(res.msg)
                 }
             });
         },
-        // trigger_file() {
-        //         this.tiShi=true;
-        //         this.avatar=null
-        //         this.showUpdataImg = false
-        //         this.showDelet = false
-        //         setTimeout(e=>{
-        //             this.tiShi= false
-        //         },4000)
-        //         // 获取input，添加点击事件
-        //         const file = document.querySelector(".file");
-        //         file.click();
-        //     },
-        //      // input发生改变，调用图片的上传
-        //     upload_img(e) {
-                
-        //         let formData = new FormData();
-        //         formData.append('file', e.target.files[0]);
-        //         formData.append('type', 'test');
-        //         // 发送异步请求，把formData发送异步请求
-              
-        //         this.util.ajax.post("/admin/authCopyright/upload.do", formData).then(e => {   
-        //             //  返回的参数
-        //             // Indicator.open({spinnerType: 'fading-circle'});
-        //              var image = new Image();
-        //              image.src = e.data.path;
-        //              var that=this;
-        //              image.onload = function() {
-        //                 // Indicator.close();  
-                        
-        //                 that.avatar=e.data.path
-        //                 that.photo = that.avatar.replace('http://59.110.169.175:8080/uploadImgs','')
-        //                 // that.showUpdataImg = true
-        //                 // that.showDelet = true
-        //              }
-                    
-        //         }).catch()
-        //     },
+        
         // 选择类别
         chooseType(){
 
@@ -367,7 +324,7 @@ export default {
               this.isShowLb = false;
 
            },
-        // 保存信息
+           // 保存信息
         toSaveInfo(){
             let _p = {
                 id:this.info_id,
@@ -384,11 +341,11 @@ export default {
             }
             this.util.ajax.get('/admin/users/save.do?realname='+this.realname+'&sex='+this.sex+'&id='+this.info_id+'&school_name='
             +this.school_name+'&interest='+this.interest+'&IDCard='+this.IDCard+'&phone='+this.telephone+'&identity='+this.identity+
-            '&nickName='+this.nickName+'&signature='+this.signature+'&photo='+this.photo).then(e=> {
+            '&nickName='+this.nickName+'&signature='+this.signature).then(e=> {
                 if(e.success == true){
                     this.Toast(e.msg)
                     // this.$router.push('/personal_center')
-                    // console.log(e.msg)
+                    console.log(e.msg)
                 }
             })
         },

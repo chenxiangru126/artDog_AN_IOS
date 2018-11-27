@@ -14,10 +14,10 @@
             <p class="pp1"></p>
         </div>
         <div class="fenxiang_pic">
-            <span @click='inviteFriends'><img src="../../static/images/pengyouquan@2x.png" ></span>
-            <span @click='inviteWx'><img src="../../static/images/weixin@2x.png" ></span>
-            <!-- <span @click='inviteQQ'><img src="../../static/images/QQ@2x.png" ></span>
-            <span @click='inviteSina><img src="../../static/images/weibo@2x.png" ></span> -->
+            <span><img src="../../static/images/pengyouquan@2x.png" ></span>
+            <span><img src="../../static/images/weixin@2x.png" ></span>
+            <!-- <span><img src="../../static/images/QQ@2x.png" ></span>
+            <span><img src="../../static/images/weibo@2x.png" ></span> -->
         </div>
     </div>
 </template>
@@ -27,40 +27,8 @@
 </style>
 
 <script>
-import '../../znt.js' ;
 export default {
-    methods:{
-        inviteFriends(){
-            znt.share({
-                platForm:'wx_circle',
-                title:'艺狗APP',
-                desc:'一个专为设计家打造的艺术品电商平台，涵盖艺术类、版权产品、平台服务的电子商务平台',
-                imgUrl:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542694415495&di=0ace189b351584bdb4466032dccde7bc&imgtype=0&src=http%3A%2F%2Fpic.downcc.com%2Fupload%2F2018-1%2F201818959246216.jpg',
-                link:'www.baidu.com',
-                success:function(res){
-                    alert(res.msg)
-                },
-                fail:function(res){
-                    alert(res.msg)
-                }
-            });
-        },
-        inviteWx(){
-            znt.share({
-                platForm:'wx',
-                title:'艺狗APP',
-                desc:'一个专为设计家打造的艺术品电商平台，涵盖艺术类、版权产品、平台服务的电子商务平台',
-                imgUrl:'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1542694415495&di=0ace189b351584bdb4466032dccde7bc&imgtype=0&src=http%3A%2F%2Fpic.downcc.com%2Fupload%2F2018-1%2F201818959246216.jpg',
-                link:'www.baidu.com',
-                success:function(res){
-                    alert(res.msg)
-                },
-                fail:function(res){
-                    alert(res.msg)
-                }
-            });
-        },
-    }
+    
 }
 </script>
 
