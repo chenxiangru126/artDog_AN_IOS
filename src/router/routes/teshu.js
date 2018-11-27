@@ -61,17 +61,6 @@ const cuowu = [{
         headers: resolve => require(['../../components/common/header.vue'], resolve)
     }
 },{
-    path: '/set_password',
-    name: 'set_password',
-    meta: {
-        title: "修改密码"
-    },
-    components: {
-        default: resolve => require(['../../components/teshu/set_password.vue'], resolve),
-        headers: resolve => require(['../../components/common/header.vue'], resolve)
-    }
-},
-{
     path: '/about_we',
     name: 'about_we',
     meta: {
