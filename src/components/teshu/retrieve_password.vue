@@ -20,13 +20,13 @@
             <div class="w h3 line-h-3 flex-h b-b" style="margin-top:30px">
                 <div class="flex-1 c1 font-3 t-c" style=" letter-spacing: .9375rem;">密码</div>
                 <div class="flex-3 flex-h" style="border-bottom: .0625rem solid #9E9E9E">
-                    <input type="text" placeholder="请输入8位字母或数字"  class="flex-3 "  id="input_pwd" v-model="mi_code">
+                    <input type="password" placeholder="请输入8位字母或数字"  class="flex-3 "  id="input_pwd" v-model="mi_code">
                      <span class="flex-1 c6 t-r" v-show="is_show" @click="handle_click_show"><img src="../../static/images/browse.png" alt="" ></span>
                      <span class="flex-1 c6 t-r" v-show="!is_show" @click="handle_click_hide"><img src="../../static/images/yincang.png" alt="" ></span>
                 </div>
                 </div>
             <!-- <div class="agree t-c c1">确定即表示同意<a href="javascript:;">《用户协议》</a> -->
-            <div class=" submit_btn_yes" style="margin: 27px 0 0 0"  @click="get_reg">
+            <div class=" submit_btn_yes" style="margin: 12.5rem 0 0"  @click="get_reg">
                确定
             </div>
              </div>
@@ -41,7 +41,7 @@
 export default {
     data(){
         return{
-           is_show:true,
+           is_show:false,
            timers:59,
            get_code_show:false,
            tel_phone:null, //手机号
@@ -91,7 +91,7 @@ export default {
                 phone                       
             }
             //   debugger
-            this.util.ajax.get('/admin/users/sendCode02.do?phone='+phone+'&updateType=0').then(e=>{  
+            this.util.ajax.get('/admin/users/sendCode02.do?alert=0&phone='+phone+'&updateType=0').then(e=>{  
                  if(e.code ==200){
                       this.Toast('验证码发送成功')
                      this.get_yan_code = e.data;  

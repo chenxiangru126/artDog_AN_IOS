@@ -218,24 +218,7 @@ export default {
             let myreg=/^[1][3,4,5,7,8][0-9]{9}$/
             let phone = this.tel_phone
             if(phone != null && myreg.test(phone)){
-                this.get_code_show = true;
-                let timer = this.timers
-                //  点击以后就要发送请求   
-                //在进行时间判断
-                let interTimer = setInterval(()=>{
-                    if(timer== 0){
-                        clearInterval(interTimer)
-                        this.get_code_show=false;
-                        this.timers = 59;
-                        if(this.yan_code==null){
-                            this.Toast('请从新获取验证码')
-                        }
-                    }else{
-                        timer--;
-                        this.timers = timer;
-                    }
-                    
-                },1000)
+                
                 //这里发送请求
                     let phone = this.tel_phone;
                     let updateType = 1
@@ -252,8 +235,28 @@ export default {
                 this.util.ajax.get('admin/sysUserReal/sendCode.do?updataType=1&phone='+phone).then(e=>{  
                 if(e.code ==200){
                     this.Toast('验证码发送成功')
-                    this.get_yan_code = e.data;  
+                    this.get_yan_code = e.data; 
+                    this.get_code_show = true;
+                let timer = this.timers
+                //  点击以后就要发送请求   
+                //在进行时间判断
+                let interTimer = setInterval(()=>{
+                    if(timer== 0){
+                        clearInterval(interTimer)
+                        this.get_code_show=false;
+                        this.timers = 59;
+                        if(this.yan_code==null){
+                            this.Toast('请从新获取验证码')
+                        }
+                    }else{
+                        timer--;
+                        this.timers = timer;
                     }
+                    
+                },1000) 
+                }else{
+                    
+                }
                 })
             }else{
                 this.Toast('请输入手机号')

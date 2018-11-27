@@ -40,18 +40,30 @@
             }
         },
         created(){
-        var _this = this;
-                znt.getCacheUserInfo({
-                    // userId:"111",
+              
+        },
+        mounted(){
+            var _this = this;
+            
+                znt.statusBarStyle({
+                    style:'Light',
                     success:function(res){
-                        alert('token是否有值'+res.userInfo.token)
-                        // alert("登录状态:::"+res.isLogin+"用户信息"
-                        // +res.userInfo.token+res.userInfo.mobile);
-                        _this.token = res.userInfo.token
-                        _this.userId = res.userInfo.userId
-                        _this.mobile = res.userInfo.mobile
-                        
-                    },
+
+                        znt.getCacheUserInfo({
+                          success:function(res){
+                            // alert('token是否有值'+res.userInfo.token)
+                            _this.token = res.userInfo.token
+                            _this.userId = res.userInfo.userId
+                            _this.mobile = res.userInfo.mobile
+                            _this.util.ajax.get('/admin/feedback/dataListes.do?alert=0&user_id='+_this.userId).then(e=>{
+                                _this.count = e.count
+                                if(e.count > 0){
+                                    _this.hide=true
+                                }else{
+                                    _this.hide=false
+                                }
+                            })
+                        },
                     
                     fail:function(res){
                     alert(res.msg)
@@ -59,19 +71,17 @@
                     cancel:function(){
                     }
                 })
-            
- 
-        },
-        mounted(){
-            // let user_id="096327b8-1cef-4103-bc6d-1dde3d594be300"
-            this.util.ajax.get('/admin/feedback/dataListes.do?alert=0&user_id='+this.userId).then(e=>{
-                this.count = e.count
-                if(e.count>0){
-                    this.hide=true
-                }else{
-                    this.hide=false
+                    // alert(res.msg);
+                },
+                fail:function(res){
+                    alert(res.msg)
+                },
+                cancel:function(){
                 }
-            })
+            });  
+                
+            // let user_id="096327b8-1cef-4103-bc6d-1dde3d594be300"
+            
             
         },
 

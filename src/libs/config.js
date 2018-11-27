@@ -4,10 +4,10 @@ import {isAndroidOrIos} from './tools';
 const get_usr_info=resolve=>{
     if(isAndroidOrIos()==-1||/localhost/.test(location.href)){
         common_param = {
-            token: "fd1e37eb-b9a8-4744-908a-d32abd472eea",
-            mobile:"15865126812",
+            token: "9974c993-52ae-44d2-b9b7-c4b01e8def53",
+            // mobile:"15865126812",
             // token: "",
-            userId:"fd1e37eb-b9a8-4744-908a-d32abd472eea",
+            userId:"9974c993-52ae-44d2-b9b7-c4b01e8def53",
             // mobile:""
         };
     }else{

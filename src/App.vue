@@ -25,6 +25,7 @@
             this.$root.eventHup=eventHup;
         },
         mounted() {
+            
         },
         methods: {
     
