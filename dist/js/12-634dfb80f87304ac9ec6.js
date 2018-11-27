@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[12],{41:function(p,n,o){p.exports=o.p+"images/zhifu@2x.png"}}]);

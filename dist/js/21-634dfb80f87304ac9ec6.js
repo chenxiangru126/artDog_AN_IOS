@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[21],{118:function(e,p,n){e.exports=n.p+"images/delete.svg"}}]);

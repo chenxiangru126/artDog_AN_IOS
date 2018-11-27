@@ -11,6 +11,7 @@
             <span  @click="showZhu">注册</span>
         </div>
         <!-- 登录 -->
+        <transition name="boom">
         <div v-show="isLoginShow" class="denglu" >
             <div class="denglu_bj">
                 <div class="denglu_neirong">
@@ -38,8 +39,9 @@
                 </div>
             </div>
         </div>
-
+         </transition>
         <!-- 注册 -->
+        <transition name="fade">
         <div v-show="isZhuShow" class="zhuce" >
             <div class="zhuce_bj">
                 <div class="denglu_neirong">
@@ -72,12 +74,28 @@
                 </div>
             </div>
         </div>
-        
+        </transition>
     </div>
 </template>
 
 <style lang="less">
     @import 'login.less';
+    .boom-enter-active, .boom-leave-active {
+            transition: opacity .7s;
+            animation-timing-function: linear;
+        }
+    .boom-enter, .boom-leave-active {
+        animation-timing-function: linear;
+        opacity: 0;
+    }
+    .fade-enter-active, .fade-leave-active {
+            transition: opacity .7s;
+            animation-timing-function: linear;
+        }
+    .fade-enter, .fade-leave-active {
+        opacity: 0;
+        animation-timing-function: linear;
+    }
 </style>
 
 <script>
@@ -149,14 +167,13 @@ export default {
                 password,
                 // updateType
             }
-            console.log(this.dl_phone)
-            console.log(this.dl_mima)
+            
             this.util.ajax.get('/admin/users/toDenglu.do?phone='+this.dl_phone+'&password='+this.dl_mima).then(e=>{
                 let _this = this
                 if(e.success == true){
                     this.Toast(e.msg)
                     // console.log('昵称：：：'+e.user.nickName)
-                    console.log('手机号：：：'+phone)
+                    // console.log('手机号：：：'+phone)
                     // znt.cacheUserAccount({
                     //     account	:e.user.nickName,
                     //     password:password,
@@ -169,7 +186,7 @@ export default {
                             mobile: phone,
                             success:function(res){
 
-                                alert(res.msg);
+                                // alert(res.msg);
                                 _this.$router.push('/home_page')
                                     
                             },
@@ -201,24 +218,7 @@ export default {
             let myreg=/^[1][3,4,5,7,8][0-9]{9}$/
             let phone = this.tel_phone
             if(phone != null && myreg.test(phone)){
-                this.get_code_show = true;
-                let timer = this.timers
-                //  点击以后就要发送请求   
-                //在进行时间判断
-                let interTimer = setInterval(()=>{
-                    if(timer== 0){
-                        clearInterval(interTimer)
-                        this.get_code_show=false;
-                        this.timers = 59;
-                        if(this.yan_code==null){
-                            this.Toast('请从新获取验证码')
-                        }
-                    }else{
-                        timer--;
-                        this.timers = timer;
-                    }
-                    
-                },1000)
+                
                 //这里发送请求
                     let phone = this.tel_phone;
                     let updateType = 1
@@ -235,8 +235,28 @@ export default {
                 this.util.ajax.get('admin/sysUserReal/sendCode.do?updataType=1&phone='+phone).then(e=>{  
                 if(e.code ==200){
                     this.Toast('验证码发送成功')
-                    this.get_yan_code = e.data;  
+                    this.get_yan_code = e.data; 
+                    this.get_code_show = true;
+                let timer = this.timers
+                //  点击以后就要发送请求   
+                //在进行时间判断
+                let interTimer = setInterval(()=>{
+                    if(timer== 0){
+                        clearInterval(interTimer)
+                        this.get_code_show=false;
+                        this.timers = 59;
+                        if(this.yan_code==null){
+                            this.Toast('请从新获取验证码')
+                        }
+                    }else{
+                        timer--;
+                        this.timers = timer;
                     }
+                    
+                },1000) 
+                }else{
+                    
+                }
                 })
             }else{
                 this.Toast('请输入手机号')
@@ -273,7 +293,7 @@ export default {
                             mobile: phone,
                             success:function(res){
 
-                                alert(res.msg);
+                                // alert(res.msg);
                                 _this.$router.push('/home_page')
                                     
                             },

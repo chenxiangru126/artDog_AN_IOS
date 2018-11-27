@@ -159,6 +159,9 @@
     var  closeApp = function(cfg){
     exec("CloseApp",cfg)
     }
+    var  share = function(cfg){
+    exec("Share",cfg)
+    }
     var znt = {
         config: config,
         fn: _fns,

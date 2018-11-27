@@ -5,7 +5,7 @@
                 <div class="xinxi_content">
                     <div class="touxiang ">
                         <img v-if='!avatar' src="../../static/images/gerenzhongxintouxiang@2x.png">
-                        <img v-else @click='openImg' :src="avatar" style="width: 4.7rem;height: 4.7rem;border-radius:50%" >
+                        <img v-else openImg :src="avatar" style="width: 4.7rem;height: 4.7rem;border-radius:50%" >
                     </div>
                     <div class="nickname ">{{nickName}}</div>
                     <div v-if='!signature' class="signature ">待我强大之时，便是你噩梦的开始</div>
@@ -65,6 +65,7 @@
 
 <script>
 // import BScroll from 'better-scroll'
+import '../../znt.js' ;
 import {_alert,_confrim,_openimg} from '../../libs/ui';
     export default {
         data(){
@@ -76,38 +77,39 @@ import {_alert,_confrim,_openimg} from '../../libs/ui';
             }
         },
         created(){
-            let _this = this
-            znt.getCacheUserInfo({
-                    // userId:"111",
-                    success:function(res){
-                        // alert('token是否有值'+_this.token)
-                        alert("登录状态:::"+res.isLogin+"用户信息"
-                        +res.userInfo.token+res.userInfo.mobile);
-                        // _this.token = res.userInfo.token
-                        _this.userId = res.userInfo.userId
-                        // _this.mobile = res.userInfo.mobile
-                        
-                    },
-                    
-                    fail:function(res){
-                    alert(res.msg)
-                    },
-                    cancel:function(){
-                    }
-                }) 
+
         },
-        mounted(){
-            // 获取缓存中userId
-            // this.userId = this.$route.query.id
-            // 初始化信息加载
-            this.util.ajax.get('/admin/sysUser/getUserById.do?alert=0&id='+this.userId).then(e=> {
-                this.nickName = e.bean.nickName
-                this.avatar ='http://test.bjyishubiyeji.com:8080'+ e.bean.photo	
-                this.signature = e.bean.signature
-                
-            }) 
-            
-        },
+      mounted(){
+        // 获取缓存中userId
+        // this.userId = this.$route.query.id
+        // 初始化信息加载
+        let _this = this
+        znt.getCacheUserInfo({
+          // userId:"111",
+          success:function(res){
+            // alert('token是否有值'+res.userInfo.userId)
+            // alert("登录状态:::"+res.isLogin+"用户信息"
+            // +res.userInfo.token+res.userInfo.mobile);
+            // _this.token = res.userInfo.token
+            _this.userId = res.userInfo.userId
+            // _this.mobile = res.userInfo.mobile
+            _this.util.ajax.get('/admin/sysUser/getUserById.do?alert=0&id='+_this.userId).then(e=> {
+              _this.nickName = e.bean.nickName
+              _this.avatar ='http://test.bjyishubiyeji.com:8080'+ e.bean.photo
+              _this.signature = e.bean.signature
+
+            })
+          },
+
+          fail:function(res){
+            alert(res.msg)
+          },
+          cancel:function(){
+          }
+        })
+
+
+      },
         // mounted () { 
         // },
         methods:{
@@ -125,9 +127,15 @@ import {_alert,_confrim,_openimg} from '../../libs/ui';
                 this.$router.push('/goods-class')
             },
             // 查看更多信息
-            moreInfo(){
-                this.$router.push('/more_info')
-            },
+          moreInfo(){
+            this.$router.push({
+              path:'/more_info',
+              query:{
+                id:this.userId
+              }
+            })
+            // this.$router.push('/more_info')
+          },
             // 邀请
             invite(){
                 this.$router.push('/invite')
@@ -136,9 +144,9 @@ import {_alert,_confrim,_openimg} from '../../libs/ui';
             set_up(){
                 this.$router.push('/set_up')
             },
-            openImg(){
+              openImg(){
                 _openimg(this.avatar)
-            }
+              }
         }
     }
 </script>
